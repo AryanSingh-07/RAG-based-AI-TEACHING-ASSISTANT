@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import base64
 from pathlib import Path
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 import get_output
 import main
@@ -11,6 +13,7 @@ from pipeline_utils import canonical_video_name
 
 ROOT_DIR = Path(__file__).resolve().parent
 VIDEOS_DIR = ROOT_DIR / "videos"
+NOTES_DIR = ROOT_DIR / "output" / "notes"
 SUPPORTED_UPLOAD_SUFFIXES = {".mp4", ".mkv", ".mov", ".webm", ".avi"}
 
 
@@ -90,6 +93,30 @@ def apply_theme() -> None:
             border: 1px solid var(--border-soft);
             box-shadow: 0 14px 32px rgba(18, 46, 40, 0.08);
             margin-top: 0.9rem;
+        }
+
+        .download-link-button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 0.78rem 1rem;
+            margin: 0.45rem 0 0.85rem 0;
+            border-radius: 14px;
+            background: var(--accent-light);
+            color: var(--text-strong) !important;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 8px 20px rgba(18, 46, 40, 0.06);
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: background 120ms ease, border-color 120ms ease;
+        }
+
+        .download-link-button:hover {
+            background: #e2f3ec;
+            border-color: var(--border-strong);
+            color: var(--text-strong) !important;
+            text-decoration: none !important;
         }
 
         .metric-card {
@@ -282,6 +309,7 @@ def apply_theme() -> None:
         }
 
         .stButton > button,
+        .stDownloadButton > button,
         [data-testid="stFileUploaderDropzone"] button {
             background: var(--accent-light) !important;
             color: var(--text-strong) !important;
@@ -293,6 +321,7 @@ def apply_theme() -> None:
         }
 
         .stButton > button:hover,
+        .stDownloadButton > button:hover,
         [data-testid="stFileUploaderDropzone"] button:hover {
             background: #e2f3ec !important;
             border-color: var(--border-strong) !important;
@@ -301,7 +330,11 @@ def apply_theme() -> None:
         .stButton > button[kind="primary"],
         .stButton > button[data-testid*="primary"],
         .stButton button[type="primary"],
-        .stButton button[data-testid="baseButton-primary"] {
+        .stButton button[data-testid="baseButton-primary"],
+        .stDownloadButton > button[kind="primary"],
+        .stDownloadButton > button[data-testid*="primary"],
+        .stDownloadButton button[type="primary"],
+        .stDownloadButton button[data-testid="baseButton-primary"] {
             background: var(--accent-dark) !important;
             color: #ffffff !important;
             border-color: var(--accent-dark) !important;
@@ -313,14 +346,30 @@ def apply_theme() -> None:
         .stButton > button[kind="primary"]:hover,
         .stButton > button[data-testid*="primary"]:hover,
         .stButton button[type="primary"]:hover,
-        .stButton button[data-testid="baseButton-primary"]:hover {
+        .stButton button[data-testid="baseButton-primary"]:hover,
+        .stDownloadButton > button[kind="primary"]:hover,
+        .stDownloadButton > button[data-testid*="primary"]:hover,
+        .stDownloadButton button[type="primary"]:hover,
+        .stDownloadButton button[data-testid="baseButton-primary"]:hover {
             background: var(--accent-dark-hover) !important;
             border-color: var(--accent-dark-hover) !important;
         }
 
         .stButton > button span,
-        .stButton button span {
+        .stButton button span,
+        .stDownloadButton > button span,
+        .stDownloadButton button span {
             color: inherit !important;
+        }
+
+        .stDownloadButton > button,
+        .stDownloadButton > button *,
+        .stDownloadButton > button:disabled,
+        .stDownloadButton > button:disabled * {
+            color: var(--text-strong) !important;
+            text-shadow: none !important;
+            -webkit-text-fill-color: var(--text-strong) !important;
+            opacity: 1 !important;
         }
 
         [data-testid="stSidebar"] .stButton > button,
@@ -440,6 +489,127 @@ def save_uploaded_files(uploaded_files) -> list[str]:
         )
 
     return saved_files
+
+
+def list_available_note_pdfs() -> list[Path]:
+    if not NOTES_DIR.exists():
+        return []
+    return sorted(NOTES_DIR.glob("*.pdf"), key=lambda path: path.stat().st_mtime, reverse=True)
+
+
+def format_note_label(note_path: Path) -> str:
+    return canonical_video_name(note_path.stem)
+
+
+def render_download_link(label: str, data: bytes | str, file_name: str, mime: str) -> None:
+    payload = data.encode("utf-8") if isinstance(data, str) else data
+    encoded = base64.b64encode(payload).decode("utf-8")
+    components.html(
+        f"""
+        <html>
+        <head>
+        <style>
+        body {{
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+        }}
+        .download-link-button {{
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 0.78rem 1rem;
+            border-radius: 14px;
+            background: #eff8f4;
+            color: #13211e !important;
+            border: 1px solid rgba(19, 33, 30, 0.12);
+            box-shadow: 0 8px 20px rgba(18, 46, 40, 0.06);
+            font-weight: 600;
+            text-decoration: none !important;
+        }}
+        .download-link-button:hover {{
+            background: #e2f3ec;
+            border-color: rgba(19, 33, 30, 0.26);
+            color: #13211e !important;
+        }}
+        </style>
+        </head>
+        <body>
+        <a
+            href="data:{mime};base64,{encoded}"
+            download="{file_name}"
+            class="download-link-button"
+        >
+            {label}
+        </a>
+        </body>
+        </html>
+        """,
+        height=58,
+    )
+
+
+def render_notes_preview() -> None:
+    st.divider()
+    st.subheader("Notes Preview")
+
+    note_pdfs = list_available_note_pdfs()
+    if not note_pdfs:
+        st.caption("No PDF notes available yet. Generate notes from the Library section first.")
+        return
+
+    selected_note = st.selectbox(
+        "Choose notes to preview",
+        options=note_pdfs,
+        format_func=format_note_label,
+        key="notes_preview_select",
+    )
+
+    preview_col, action_col = st.columns([3.2, 1], gap="large")
+    pdf_bytes = selected_note.read_bytes()
+    pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
+
+    with preview_col:
+        st.markdown(
+            f"""
+            <iframe
+                src="data:application/pdf;base64,{pdf_base64}"
+                width="100%"
+                height="720"
+                style="border: 1px solid rgba(19, 33, 30, 0.12); border-radius: 18px; background: white;"
+            ></iframe>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with action_col:
+        st.markdown("### Download")
+        render_download_link(
+            "Download PDF Notes",
+            pdf_bytes,
+            selected_note.name,
+            "application/pdf",
+        )
+
+        matching_docx = selected_note.with_suffix(".docx")
+        if matching_docx.exists():
+            render_download_link(
+                "Download DOCX",
+                matching_docx.read_bytes(),
+                matching_docx.name,
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            )
+
+        matching_md = selected_note.with_suffix(".md")
+        if matching_md.exists():
+            render_download_link(
+                "Download Markdown",
+                matching_md.read_text(encoding="utf-8"),
+                matching_md.name,
+                "text/markdown",
+            )
 
 
 def run_pipeline_from_ui(force_reprocess: bool) -> None:
@@ -582,7 +752,8 @@ def render_dashboard() -> None:
             results = notes_generator.generate_notes(selected_specific)
             st.success(f"Generated notes for {len(results)} selected video(s).")
             for result in results:
-                st.info(f"Saved notes to {result['markdown_path']}")
+                st.info(f"Saved notes to {result.get('pdf_path') or result['markdown_path']}")
+            st.rerun()
         except Exception as exc:
             st.error(str(exc))
 
@@ -687,6 +858,8 @@ def render_dashboard() -> None:
             },
         )
 
+    render_notes_preview()
+
     st.divider()
     st.subheader("YouTube Playlist Import (Beta)")
     playlist_url = st.text_input("Playlist URL", placeholder="https://www.youtube.com/playlist?list=...")
@@ -723,7 +896,7 @@ def render_dashboard() -> None:
             selected_ids = set(selected)
 
     with col_download:
-        if st.button("Download Selected", type="primary", disabled=not selected_ids):
+        if st.button("Download Selected", use_container_width=True, disabled=not selected_ids):
             cache = st.session_state.get("playlist_cache", {})
             vids = cache.get("videos", [])
             title = cache.get("title", "playlist")

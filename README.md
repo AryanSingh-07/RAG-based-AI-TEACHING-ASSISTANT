@@ -10,12 +10,17 @@ This project turns educational videos into a searchable knowledge base, then ans
 - Builds embeddings with `sentence-transformers`
 - Retrieves the most relevant chunks for a question
 - Uses an OpenRouter-hosted LLM to generate a student-friendly answer
+- Generates lecture notes with important slide captures
+- Exports notes as Markdown, DOCX, and PDF
 
 ## Requirements
 
 - Python 3.10 or higher recommended
 - `ffmpeg` available on your system PATH
-- An OpenRouter-compatible API key stored as `MIMO_API_KEY`
+- An OpenRouter-compatible API key stored as `MIMO_API_KEY` or `OPENROUTER_API_KEY`
+- For slide OCR in lecture notes:
+  - Tesseract OCR installed on your system PATH
+  - the Python dependencies from `requirements.txt`
 
 ## Setup
 
@@ -29,6 +34,16 @@ Create a `.env` file in the project root:
 
 ```env
 MIMO_API_KEY=your_openrouter_api_key_here
+# or
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+```
+
+Optional model overrides:
+
+```env
+OPENROUTER_MODEL=openrouter/free
+LECTURE_NOTES_MODEL=openrouter/free
+WHISPER_DEVICE=cpu
 ```
 
 ## Usage
@@ -52,6 +67,8 @@ python main.py --force-reprocess
 python main.py --question "What is Java bytecode?"
 python main.py --question "What is TensorFlow?" --top-k 3
 python main.py --no-interactive
+python main.py --generate-notes --no-interactive
+python main.py --notes-videos "Angular\\Learn NgModule in Angular with Examples [oqZ4-ULwfbc].mp4" --no-interactive
 ```
 
 Type `exit` or `quit` to leave the interactive Q&A loop.
@@ -68,8 +85,35 @@ The dashboard lets you:
 
 - Upload videos directly into the project
 - Rebuild the processing pipeline from the browser
+- Process selected videos from the library sidebar
+- Import videos from a YouTube playlist
 - Ask questions with a textarea instead of the terminal
 - Inspect the retrieved transcript chunks and similarity scores
+- Generate lecture notes for selected videos
+- Preview generated notes as PDF in the browser
+- Download notes as PDF, DOCX, or Markdown from the main screen
+
+The project includes `.streamlit/config.toml` with file watching disabled to avoid the known Streamlit + `torch.classes` watcher crash.
+
+## Lecture Notes Workflow
+
+The notes pipeline reuses your processed transcripts instead of starting from scratch:
+
+1. Process a video so a transcript JSON exists in `json_data/`
+2. Generate notes from the dashboard Library section or with the CLI
+3. The notes pipeline:
+   - builds larger transcript sections
+   - removes near-duplicate transcript segments
+   - samples OCR-rich frames from each section
+   - keeps distinct important slides
+   - writes notes to `output/notes/`
+
+Generated note files:
+
+- `output/notes/<video>.md`
+- `output/notes/<video>.docx`
+- `output/notes/<video>.pdf`
+- `output/notes/frames/<video>/...`
 
 ## Project Structure
 
@@ -77,15 +121,20 @@ The dashboard lets you:
 .
 ├── main.py
 ├── dashboard.py
+├── notes_generator.py
 ├── video_tranformer.py
 ├── audio_transformer.py
 ├── json_processor.py
 ├── data_processor.py
 ├── get_output.py
+├── .streamlit/
+│   └── config.toml
 ├── videos/
 ├── audios/
 ├── json_data/
 ├── clean_json_data/
+├── output/
+│   └── notes/
 ├── dataframe.joblib
 ├── processed_videos.joblib
 └── response.txt
@@ -97,6 +146,7 @@ The dashboard lets you:
 - Processed video filenames are cached in `processed_videos.joblib`
 - The latest generated answer is written to `response.txt`
 - If you add, remove, or rename a video, the pipeline rebuilds automatically
+- Generated notes and note preview assets are treated as build artifacts and are ignored by git
 
 ## Recent Improvements
 
@@ -105,6 +155,11 @@ The dashboard lets you:
 - Improved path handling and file validation
 - Added clearer runtime errors for missing data and missing API keys
 - Cleaned dependencies to match the actual codebase
+- Added playlist-aware incremental processing
+- Added larger transcript chunking for retrieval
+- Added lecture notes generation with OCR-backed important slides
+- Added PDF preview and notes downloads in the dashboard
+- Added a Streamlit config workaround for `torch.classes` watcher errors
 
 ## License
 
