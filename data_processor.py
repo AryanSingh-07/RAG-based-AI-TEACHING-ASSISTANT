@@ -1,55 +1,86 @@
-import os
+from __future__ import annotations
+
 import json
-import pandas as pd
+from pathlib import Path
+
 import joblib
-from dotenv import load_dotenv
+import numpy as np
+import pandas as pd
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+ROOT_DIR = Path(__file__).resolve().parent
+EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-# ---------- ENV & CLIENT ----------
-load_dotenv()
+_embedding_model: SentenceTransformer | None = None
 
 
-# ---------- EMBEDDING ----------
-def create_embeddings(texts: list[str]) -> list[list[float]]:
+def get_embedding_model() -> SentenceTransformer:
+    global _embedding_model
+    if _embedding_model is None:
+        _embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+    return _embedding_model
+
+
+def create_embeddings(texts: list[str]):
     if not texts:
         return []
-    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-    embeddings = model.encode(texts)
+    return get_embedding_model().encode(
+        texts,
+        batch_size=64,
+        show_progress_bar=False,
+        convert_to_numpy=True,
+        normalize_embeddings=True,
+    )
 
-    return embeddings
 
-
-# ---------- MAIN PIPELINE ----------
 def build_dataframe(
-    json_dir="clean_json_data",
-    videos_dir="videos",
-    df_out="dataframe.joblib",
-    videos_out="processed_videos.joblib",
-):
-    records = []
-    chunk_id = 0
+    json_dir: str | Path = ROOT_DIR / "clean_json_data",
+    videos_dir: str | Path = ROOT_DIR / "videos",
+    df_out: str | Path = ROOT_DIR / "dataframe.joblib",
+    videos_out: str | Path = ROOT_DIR / "processed_videos.joblib",
+    json_files: list[str] | None = None,
+    reset: bool = False,
+) -> None:
+    json_dir = Path(json_dir)
+    videos_dir = Path(videos_dir)
+    df_out = Path(df_out)
+    videos_out = Path(videos_out)
 
-    for file in os.listdir(json_dir):
-        path = os.path.join(json_dir, file)
-        if not path.endswith(".json"):
+    if not json_dir.exists():
+        raise FileNotFoundError(f"Clean JSON directory not found: {json_dir}")
+
+    if not reset and df_out.exists():
+        dataframe = joblib.load(df_out)
+        records = dataframe.to_dict(orient="records")
+        chunk_id = int(dataframe["id"].max()) + 1 if not dataframe.empty else 0
+        existing_video_names = set(dataframe["video_name"].astype(str))
+    else:
+        records = []
+        chunk_id = 0
+        existing_video_names: set[str] = set()
+
+    requested_files = set(json_files or [])
+    json_paths = sorted(path for path in json_dir.glob("*.json") if not requested_files or path.name in requested_files)
+
+    for path in json_paths:
+        with path.open("r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        video_name = path.stem
+        if video_name in existing_video_names:
             continue
 
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
         chunks = data.get("chunks", [])
-        texts = [c.get("text", "").strip() for c in chunks if c.get("text")]
+        texts = [chunk.get("text", "").strip() for chunk in chunks if chunk.get("text", "").strip()]
 
         if not texts:
             continue
 
-        print(f"Embedding → {file}")
+        print(f"Embedding -> {path.name}")
         embeddings = create_embeddings(texts)
 
         if len(embeddings) != len(texts):
-            raise RuntimeError("Embedding count mismatch")
+            raise RuntimeError(f"Embedding count mismatch for {path.name}")
 
         emb_idx = 0
         for chunk in chunks:
@@ -57,30 +88,36 @@ def build_dataframe(
             if not text:
                 continue
 
-            record = dict(chunk)
-            record["id"] = chunk_id
-            record["embedding"] = embeddings[emb_idx]
-
+            record = {
+                "id": chunk_id,
+                "video_name": chunk["video_name"],
+                "text": text,
+                "start": float(chunk["start"]),
+                "end": float(chunk["end"]),
+                "embedding": embeddings[emb_idx],
+            }
             records.append(record)
             chunk_id += 1
             emb_idx += 1
 
     if not records:
-        raise RuntimeError("No records generated")
+        raise RuntimeError("No transcript chunks were available to embed.")
 
-    df = pd.DataFrame(records)
-    joblib.dump(df, df_out)
+    dataframe = pd.DataFrame(records)
+    if "embedding" in dataframe.columns:
+        dataframe["embedding"] = dataframe["embedding"].apply(lambda value: np.asarray(value, dtype=np.float32))
+    joblib.dump(dataframe, df_out)
 
-    if os.path.isdir(videos_dir):
-        videos = [
-            f for f in os.listdir(videos_dir)
-            if os.path.isfile(os.path.join(videos_dir, f))
-        ]
-        joblib.dump(videos, videos_out)
+    if videos_dir.exists():
+        video_files = sorted(
+            str(file.relative_to(videos_dir))
+            for file in videos_dir.rglob("*")
+            if file.is_file()
+        )
+        joblib.dump(video_files, videos_out)
 
-    print(f"Saved {len(df)} chunks")
+    print(f"Saved {len(dataframe)} chunks to {df_out.name}")
 
 
-# ---------- RUN ----------
 if __name__ == "__main__":
     build_dataframe()

@@ -1,0 +1,34 @@
+{
+  "videos": {
+    "Angular\\Learn NgModule in Angular with Examples [oqZ4-ULwfbc].mp4": {
+      "name": "Learn NgModule in Angular with Examples [oqZ4-ULwfbc].mp4",
+      "canonical_name": "Learn NgModule in Angular with Examples",
+      "size": 17577448,
+      "mtime_ns": 1775293578887878400
+    },
+    "He just crawled through hell to fix the browser\u2026 [vd14EElCRvs].mp4": {
+      "name": "He just crawled through hell to fix the browser\u2026 [vd14EElCRvs].mp4",
+      "canonical_name": "He just crawled through hell to fix the browser\u2026",
+      "size": 25559121,
+      "mtime_ns": 1775214191674671600
+    },
+    "Java in 100 Seconds [l9AzO1FMgM8].webm": {
+      "name": "Java in 100 Seconds [l9AzO1FMgM8].webm",
+      "canonical_name": "Java in 100 Seconds",
+      "size": 27240761,
+      "mtime_ns": 1757841194439364100
+    },
+    "Python in 100 Seconds [x7X9w_GIm1s].webm": {
+      "name": "Python in 100 Seconds [x7X9w_GIm1s].webm",
+      "canonical_name": "Python in 100 Seconds",
+      "size": 33437558,
+      "mtime_ns": 1757841170791002200
+    },
+    "TensorFlow in 100 Seconds [i8NETqtGHms].webm": {
+      "name": "TensorFlow in 100 Seconds [i8NETqtGHms].webm",
+      "canonical_name": "TensorFlow in 100 Seconds",
+      "size": 49684844,
+      "mtime_ns": 1757841077486358800
+    }
+  }
+}

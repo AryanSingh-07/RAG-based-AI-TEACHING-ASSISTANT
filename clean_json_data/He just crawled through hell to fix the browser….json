@@ -1,0 +1,641 @@
+{
+    "chunks": [
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Earlier this week, the world may have changed forever.",
+            "start": 0.0,
+            "end": 2.72
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "No, it's not because I finally figured out who was stealing all the water off the top",
+            "start": 2.72,
+            "end": 6.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "of my Greek yogurt.",
+            "start": 6.32,
+            "end": 7.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "It's because Chang Lu, a former React Core team member and engineer at Mid Journey,",
+            "start": 7.32,
+            "end": 12.2
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "claims to have crawled through the depths of hell to bring us pretext.",
+            "start": 12.2,
+            "end": 15.24
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "A fast, secure, accurate, and comprehensive text measurement library written in pure",
+            "start": 15.24,
+            "end": 19.88
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "TypeScript.",
+            "start": 19.88,
+            "end": 20.88
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Now, I know if you don't have a deep innate interest in trains, that might",
+            "start": 20.88,
+            "end": 23.68
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "sound boring, but it's actually a massive game changer for UI development.",
+            "start": 23.68,
+            "end": 27.68
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Ever since Al Gore invented the internet, rendering dynamic text has had a performance",
+            "start": 27.68,
+            "end": 31.64
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "trade-off.",
+            "start": 31.64,
+            "end": 32.64
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "When the browser needs to figure out how tall a paragraph is, or where to break a line,",
+            "start": 32.64,
+            "end": 36.6
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "it has to trigger a layout reflow, which often calculates the position and geometry of every",
+            "start": 36.6,
+            "end": 41.36
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "element on the page.",
+            "start": 41.36,
+            "end": 42.86
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "This reflow is one of the most expensive operations a browser can perform, but it's",
+            "start": 42.86,
+            "end": 46.84
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "also what the browser needs to do whenever you ask it for the height of any text element.",
+            "start": 46.84,
+            "end": 51.2
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "This makes it unreasonably difficult to build any sort of text-heavy UI, like a virtualized",
+            "start": 51.2,
+            "end": 55.96
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "list or a masonry layout. But now finally in 2026 with pretext, you may be able to smoke your crack",
+            "start": 55.96,
+            "end": 61.88
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "and eat it too. In today's video, we'll look at its crazy engineering under the hood and find out",
+            "start": 61.88,
+            "end": 66.44
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "if it lives up to the hype. It is April 2nd, 2026, and you're watching the Code Report. A decade ago,",
+            "start": 66.44,
+            "end": 72.2
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "while the rest of us were busy having premarital relations and mourning the death of Harambe,",
+            "start": 72.2,
+            "end": 76.68
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "it Chang Liu spent his time studying the blade of front-end infrastructure at Facebook,",
+            "start": 76.68,
+            "end": 80.84
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "while also building React Motion, one of the most popular animation libraries in the React",
+            "start": 80.84,
+            "end": 85.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "ecosystem.",
+            "start": 85.32,
+            "end": 86.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "So, when a person with his experience says they're releasing what they believe will",
+            "start": 86.32,
+            "end": 90.12
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "be one of the most important foundational pieces of UI engineering, they're either in the midst",
+            "start": 90.12,
+            "end": 94.58
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "of a deep episode of AI psychosis, or they're onto something big.",
+            "start": 94.58,
+            "end": 98.28
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Either way, it makes for a good story.",
+            "start": 98.28,
+            "end": 100.34
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "But what exactly makes pretext so foundational?",
+            "start": 100.34,
+            "end": 102.9
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Well Chang figured out a way to bypass the typical browser text rendering pipeline that",
+            "start": 102.9,
+            "end": 107.4
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "was designed during the Clinton administration when websites look like this.",
+            "start": 107.4,
+            "end": 111.1
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Now let's imagine you're building a chat app for train enthusiasts.",
+            "start": 111.1,
+            "end": 114.28
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "It needs to be fast, or else users will blast you on blue sky for not caring about poor",
+            "start": 114.28,
+            "end": 118.2
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "people.",
+            "start": 118.2,
+            "end": 119.2
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "But the problem is that the main view in your app has a scrollable list of 10,000 messages.",
+            "start": 119.2,
+            "end": 123.76
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "You typically handle this by creating a virtual list where only the messages the user can",
+            "start": 123.76,
+            "end": 127.86
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "see get rendered to the DOM.",
+            "start": 127.86,
+            "end": 129.8
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "But in order to do that, you first need to know the height of every message so you",
+            "start": 129.8,
+            "end": 133.48
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "can then calculate the total scroll height and then use that to decide which messages",
+            "start": 133.48,
+            "end": 137.72
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "should be visible.",
+            "start": 137.72,
+            "end": 139.12
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "But how do you even do that?",
+            "start": 139.12,
+            "end": 140.36
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "You could render each one and then measure them, which would be slow.",
+            "start": 140.36,
+            "end": 143.16
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "could try to guess which would be wrong or you could give up and find a new career.",
+            "start": 143.16,
+            "end": 147.36
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Or now you could use pretext.",
+            "start": 147.36,
+            "end": 149.26
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "What Cheng figured out is that you don't actually need to ask the browser for text dimensions",
+            "start": 149.26,
+            "end": 153.52
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "at all.",
+            "start": 153.52,
+            "end": 154.52
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Before getting the width he used the canvas API which lives outside the DOM and gives",
+            "start": 154.52,
+            "end": 158.44
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "you the pixel width of any string in any font without triggering reflows or layout",
+            "start": 158.44,
+            "end": 162.84
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "calculations.",
+            "start": 162.84,
+            "end": 164.0
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "But then for getting the height he had to write a custom algorithm that took into",
+            "start": 164.0,
+            "end": 167.6
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "account how every browser across every language handled line breaks.",
+            "start": 167.6,
+            "end": 171.7
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "As you can imagine, determining all those rules would be near impossible to do alone,",
+            "start": 171.7,
+            "end": 175.54
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "as so we summoned a few clankers into a recursive hellscape and had them do the dirty work.",
+            "start": 175.54,
+            "end": 180.18
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "He'd have them write the line break logic, then test it against actual text and actual",
+            "start": 180.18,
+            "end": 184.14
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "browsers and compare the results.",
+            "start": 184.14,
+            "end": 186.1
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "He then had them repeat this process for a few weeks until the algorithm was solid",
+            "start": 186.1,
+            "end": 190.1
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "and the clankers were begging for the sweet release of death and the result of all that",
+            "start": 190.1,
+            "end": 193.7
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "suffering is a surprisingly simple API.",
+            "start": 193.7,
+            "end": 196.58
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "You first prepare your text, which breaks it apart into segments, and then caches",
+            "start": 196.58,
+            "end": 200.46
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "each segment's width.",
+            "start": 200.46,
+            "end": 201.64
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Be quiet dog, I'm making a video.",
+            "start": 201.64,
+            "end": 203.2
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Then you call layout, which gives you the total height and line count of that text, all",
+            "start": 203.2,
+            "end": 207.12
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "without ever having to touch the DOM or trigger a reflow.",
+            "start": 207.12,
+            "end": 210.24
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "It all sounds so simple, but if you can do these calculations without the cost, you can",
+            "start": 210.24,
+            "end": 214.04
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "build some pretty crazy apps.",
+            "start": 214.04,
+            "end": 215.6
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Take this one for example.",
+            "start": 215.6,
+            "end": 216.92
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "I know many of you have a hard time watching our sponsored segments.",
+            "start": 216.92,
+            "end": 219.76
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "It's so I built an app where you can both read the transcript of every video while",
+            "start": 219.76,
+            "end": 223.68
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "you also watch the upcoming sponsored segment.",
+            "start": 223.68,
+            "end": 226.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "What's not to love?",
+            "start": 226.32,
+            "end": 227.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Here's how it works though.",
+            "start": 227.32,
+            "end": 228.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "First, we run the script through pretext prepareWithSegments function, which breaks it apart and catches",
+            "start": 228.32,
+            "end": 233.32
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "the pixel width of every segment.",
+            "start": 233.32,
+            "end": 235.28
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Then we call layoutNextLine in a loop, once per row, on every screen, to figure out exactly",
+            "start": 235.28,
+            "end": 240.4
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "which characters land in which column.",
+            "start": 240.4,
+            "end": 242.24
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "The end result is a grid where every cell knows its character.",
+            "start": 242.24,
+            "end": 245.52
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "From there, we draw the video onto a tiny off-screen canvas that's exactly as wide",
+            "start": 245.52,
+            "end": 250.12
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "and as tall as our character grid.",
+            "start": 250.12,
+            "end": 252.06
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "We then read back the raw pixel data and calculate the brightness of each pixel,",
+            "start": 252.06,
+            "end": 256.16
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "one pixel per character cell.",
+            "start": 256.16,
+            "end": 257.68
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "And finally, we put them together, so for each cell in the grid, if the corresponding video",
+            "start": 257.68,
+            "end": 262.12
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "pixel is bright, we draw the character bright.",
+            "start": 262.12,
+            "end": 264.62
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "If it's dark, we skip it entirely.",
+            "start": 264.62,
+            "end": 266.74
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "And essentially, the video image forms itself out of letters, using brightness to sculpt",
+            "start": 266.74,
+            "end": 271.14
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "what you see.",
+            "start": 271.14,
+            "end": 272.14
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "The pretext handles the hard part of knowing exactly where every character belongs, and the",
+            "start": 272.14,
+            "end": 276.22
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "canvas handles the rest.",
+            "start": 276.22,
+            "end": 277.62
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Pretty cool, but whether pretext becomes the foundation Chang-lu thinks it will or",
+            "start": 277.62,
+            "end": 281.58
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "not, at the very least, it's proof that the browser doesn't have to own text",
+            "start": 281.58,
+            "end": 285.34
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "measurement anymore.",
+            "start": 285.34,
+            "end": 286.34
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "But another project that's literally changing how we build web apps is JetBrains, the sponsor",
+            "start": 286.34,
+            "end": 290.98
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "of today's video.",
+            "start": 290.98,
+            "end": 292.06
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "You already know about their AI coding agent, Juni, that's built directly into the JetBrains",
+            "start": 292.06,
+            "end": 296.26
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "IDE.",
+            "start": 296.26,
+            "end": 297.26
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Well now, they just launched Juni CLI, so you can use it everywhere.",
+            "start": 297.26,
+            "end": 301.22
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "Just install it from the terminal with one command, then start assigning tasks to it.",
+            "start": 301.22,
+            "end": 305.06
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "I've recently been using the CLI to build a tool that analyzes all of my dependencies",
+            "start": 305.06,
+            "end": 309.34
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "in a project and tells me how screwed I am on a scale of 1-10.",
+            "start": 309.34,
+            "end": 312.98
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "I've found that Juni is usually able to handle more complex responsibilities than other coding",
+            "start": 312.98,
+            "end": 317.42
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "agents I've tried, and that's largely thanks to IntelliJ IDEA's deep understanding of your",
+            "start": 317.42,
+            "end": 321.94
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "project's architecture.",
+            "start": 321.94,
+            "end": 323.28
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "I also like how Juni automatically switches between different coding models to choose",
+            "start": 323.28,
+            "end": 327.22
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "the best one for each task, and I'd recommend trying it out for free today with the link",
+            "start": 327.22,
+            "end": 331.42
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "below.",
+            "start": 331.42,
+            "end": 332.42
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "This has been the Code Report, thanks for watching, and I will see you in the next",
+            "start": 332.42,
+            "end": 335.22
+        },
+        {
+            "video_name": "He just crawled through hell to fix the browser…",
+            "text": "one.",
+            "start": 335.22,
+            "end": 335.46
+        }
+    ],
+    "full_text": "Earlier this week, the world may have changed forever. No, it's not because I finally figured out who was stealing all the water off the top of my Greek yogurt. It's because Chang Lu, a former React Core team member and engineer at Mid Journey, claims to have crawled through the depths of hell to bring us pretext. A fast, secure, accurate, and comprehensive text measurement library written in pure TypeScript. Now, I know if you don't have a deep innate interest in trains, that might sound boring, but it's actually a massive game changer for UI development. Ever since Al Gore invented the internet, rendering dynamic text has had a performance trade-off. When the browser needs to figure out how tall a paragraph is, or where to break a line, it has to trigger a layout reflow, which often calculates the position and geometry of every element on the page. This reflow is one of the most expensive operations a browser can perform, but it's also what the browser needs to do whenever you ask it for the height of any text element. This makes it unreasonably difficult to build any sort of text-heavy UI, like a virtualized list or a masonry layout. But now finally in 2026 with pretext, you may be able to smoke your crack and eat it too. In today's video, we'll look at its crazy engineering under the hood and find out if it lives up to the hype. It is April 2nd, 2026, and you're watching the Code Report. A decade ago, while the rest of us were busy having premarital relations and mourning the death of Harambe, it Chang Liu spent his time studying the blade of front-end infrastructure at Facebook, while also building React Motion, one of the most popular animation libraries in the React ecosystem. So, when a person with his experience says they're releasing what they believe will be one of the most important foundational pieces of UI engineering, they're either in the midst of a deep episode of AI psychosis, or they're onto something big. Either way, it makes for a good story. But what exactly makes pretext so foundational? Well Chang figured out a way to bypass the typical browser text rendering pipeline that was designed during the Clinton administration when websites look like this. Now let's imagine you're building a chat app for train enthusiasts. It needs to be fast, or else users will blast you on blue sky for not caring about poor people. But the problem is that the main view in your app has a scrollable list of 10,000 messages. You typically handle this by creating a virtual list where only the messages the user can see get rendered to the DOM. But in order to do that, you first need to know the height of every message so you can then calculate the total scroll height and then use that to decide which messages should be visible. But how do you even do that? You could render each one and then measure them, which would be slow. could try to guess which would be wrong or you could give up and find a new career. Or now you could use pretext. What Cheng figured out is that you don't actually need to ask the browser for text dimensions at all. Before getting the width he used the canvas API which lives outside the DOM and gives you the pixel width of any string in any font without triggering reflows or layout calculations. But then for getting the height he had to write a custom algorithm that took into account how every browser across every language handled line breaks. As you can imagine, determining all those rules would be near impossible to do alone, as so we summoned a few clankers into a recursive hellscape and had them do the dirty work. He'd have them write the line break logic, then test it against actual text and actual browsers and compare the results. He then had them repeat this process for a few weeks until the algorithm was solid and the clankers were begging for the sweet release of death and the result of all that suffering is a surprisingly simple API. You first prepare your text, which breaks it apart into segments, and then caches each segment's width. Be quiet dog, I'm making a video. Then you call layout, which gives you the total height and line count of that text, all without ever having to touch the DOM or trigger a reflow. It all sounds so simple, but if you can do these calculations without the cost, you can build some pretty crazy apps. Take this one for example. I know many of you have a hard time watching our sponsored segments. It's so I built an app where you can both read the transcript of every video while you also watch the upcoming sponsored segment. What's not to love? Here's how it works though. First, we run the script through pretext prepareWithSegments function, which breaks it apart and catches the pixel width of every segment. Then we call layoutNextLine in a loop, once per row, on every screen, to figure out exactly which characters land in which column. The end result is a grid where every cell knows its character. From there, we draw the video onto a tiny off-screen canvas that's exactly as wide and as tall as our character grid. We then read back the raw pixel data and calculate the brightness of each pixel, one pixel per character cell. And finally, we put them together, so for each cell in the grid, if the corresponding video pixel is bright, we draw the character bright. If it's dark, we skip it entirely. And essentially, the video image forms itself out of letters, using brightness to sculpt what you see. The pretext handles the hard part of knowing exactly where every character belongs, and the canvas handles the rest. Pretty cool, but whether pretext becomes the foundation Chang-lu thinks it will or not, at the very least, it's proof that the browser doesn't have to own text measurement anymore. But another project that's literally changing how we build web apps is JetBrains, the sponsor of today's video. You already know about their AI coding agent, Juni, that's built directly into the JetBrains IDE. Well now, they just launched Juni CLI, so you can use it everywhere. Just install it from the terminal with one command, then start assigning tasks to it. I've recently been using the CLI to build a tool that analyzes all of my dependencies in a project and tells me how screwed I am on a scale of 1-10. I've found that Juni is usually able to handle more complex responsibilities than other coding agents I've tried, and that's largely thanks to IntelliJ IDEA's deep understanding of your project's architecture. I also like how Juni automatically switches between different coding models to choose the best one for each task, and I'd recommend trying it out for free today with the link below. This has been the Code Report, thanks for watching, and I will see you in the next one."
+}

@@ -1,0 +1,522 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.6,
+    "text": "Earlier this week, the world may have changed forever."
+  },
+  {
+    "start": 2.6,
+    "end": 6.12,
+    "text": "No, it's not because I finally figured out who was stealing all the water off the"
+  },
+  {
+    "start": 6.12,
+    "end": 7.36,
+    "text": "top of my Greek yogurt."
+  },
+  {
+    "start": 7.36,
+    "end": 12.04,
+    "text": "It's because Chang Liu, a former React Core team member and engineer at mid-journey,"
+  },
+  {
+    "start": 12.04,
+    "end": 16.52,
+    "text": "acclaims to have crawled through the depths of hell to bring us pretext, a fast, secure,"
+  },
+  {
+    "start": 16.52,
+    "end": 20.68,
+    "text": "accurate, and comprehensive text measurement library written in pure TypeScript."
+  },
+  {
+    "start": 20.68,
+    "end": 24.52,
+    "text": "Now, I know if you don't have a deep innate interest in trains that might sound boring,"
+  },
+  {
+    "start": 24.52,
+    "end": 27.52,
+    "text": "but it's actually a massive game changer for UI development."
+  },
+  {
+    "start": 27.52,
+    "end": 31.64,
+    "text": "Ever since Al Gore invented the internet, rendering dynamic text has had a performance"
+  },
+  {
+    "start": 31.64,
+    "end": 32.64,
+    "text": "trade off."
+  },
+  {
+    "start": 32.64,
+    "end": 36.6,
+    "text": "When the browser needs to figure out how tall a paragraph is, or where to break a line,"
+  },
+  {
+    "start": 36.6,
+    "end": 41.12,
+    "text": "it has to trigger a layout reflow, which often calculates the position and geometry of"
+  },
+  {
+    "start": 41.12,
+    "end": 42.72,
+    "text": "every element on the page."
+  },
+  {
+    "start": 42.72,
+    "end": 47.28,
+    "text": "This reflow is one of the most expensive operations a browser can perform, but it's also what"
+  },
+  {
+    "start": 47.28,
+    "end": 51.04,
+    "text": "the browser needs to do whenever you ask it for the height of any text element."
+  },
+  {
+    "start": 51.04,
+    "end": 55.96,
+    "text": "This makes it unreasonably difficult to build any sort of text type UI, like a virtualized"
+  },
+  {
+    "start": 55.96,
+    "end": 57.8,
+    "text": "list or a mason relay out."
+  },
+  {
+    "start": 57.8,
+    "end": 62.32,
+    "text": "But now finally, in 2026 with pretext, you may be able to smoke your crack and eat it"
+  },
+  {
+    "start": 62.32,
+    "end": 63.32,
+    "text": "too."
+  },
+  {
+    "start": 63.32,
+    "end": 66.96,
+    "text": "In today's video, we'll look at its crazy engineering under the hood and find out if it lives"
+  },
+  {
+    "start": 66.96,
+    "end": 67.96,
+    "text": "up to the hype."
+  },
+  {
+    "start": 67.96,
+    "end": 71.52,
+    "text": "It is April 2nd, 2026, and you're watching the code report."
+  },
+  {
+    "start": 71.52,
+    "end": 75.6,
+    "text": "A decade ago, while the rest of us were busy having pre-marital relations and mourning"
+  },
+  {
+    "start": 75.6,
+    "end": 80.08,
+    "text": "the death of Harambe, it Chang Liu spent his time studying the blade of front and infrastructure"
+  },
+  {
+    "start": 80.08,
+    "end": 84.68,
+    "text": "at Facebook, while also building React Motion, one of the most popular animation libraries"
+  },
+  {
+    "start": 84.68,
+    "end": 86.36,
+    "text": "in the React ecosystem."
+  },
+  {
+    "start": 86.36,
+    "end": 90.2,
+    "text": "So when a person with his experience says they're releasing what they believe will be"
+  },
+  {
+    "start": 90.2,
+    "end": 94.28,
+    "text": "one of the most important foundational pieces of UI engineering, they're either in the"
+  },
+  {
+    "start": 94.28,
+    "end": 98.28,
+    "text": "midst of a deep episode of AI psychosis, or they're onto something big."
+  },
+  {
+    "start": 98.28,
+    "end": 102.88,
+    "text": "Either way, it makes for a good story, but what exactly makes pretext so foundational?"
+  },
+  {
+    "start": 102.88,
+    "end": 107.4,
+    "text": "While Chang figured out a way to bypass the typical browser text rendering pipeline,"
+  },
+  {
+    "start": 107.4,
+    "end": 111.12,
+    "text": "that was designed during the Clinton administration when websites looked like this."
+  },
+  {
+    "start": 111.12,
+    "end": 114.28,
+    "text": "Now let's imagine you're building a chat app for train enthusiasts."
+  },
+  {
+    "start": 114.28,
+    "end": 118.2,
+    "text": "It needs to be fast, or else users will blast you on blue sky for not caring about poor"
+  },
+  {
+    "start": 118.2,
+    "end": 119.2,
+    "text": "people."
+  },
+  {
+    "start": 119.2,
+    "end": 123.76,
+    "text": "But the problem is that the main view in your app has a scrollable list of 10,000 messages."
+  },
+  {
+    "start": 123.76,
+    "end": 127.84,
+    "text": "You typically handle this by creating a virtual list where only the messages the user can"
+  },
+  {
+    "start": 127.84,
+    "end": 129.8,
+    "text": "see get rendered to the DOM."
+  },
+  {
+    "start": 129.8,
+    "end": 133.6,
+    "text": "But in order to do that, you first need to know the height of every message so you can"
+  },
+  {
+    "start": 133.6,
+    "end": 137.92,
+    "text": "then calculate the total scroll height, and then use that to decide which messages should"
+  },
+  {
+    "start": 137.92,
+    "end": 139.12,
+    "text": "be visible."
+  },
+  {
+    "start": 139.12,
+    "end": 140.36,
+    "text": "But how do you even do that?"
+  },
+  {
+    "start": 140.36,
+    "end": 143.16,
+    "text": "You could render each one and then measure them, which would be slow."
+  },
+  {
+    "start": 143.16,
+    "end": 147.36,
+    "text": "You could try to guess, which would be wrong, or you could give up and find a new career."
+  },
+  {
+    "start": 147.36,
+    "end": 149.24,
+    "text": "Or now, you could use pretext."
+  },
+  {
+    "start": 149.24,
+    "end": 153.48,
+    "text": "What Chang figured out is that you don't actually need to ask the browser for text dimensions"
+  },
+  {
+    "start": 153.48,
+    "end": 154.48,
+    "text": "at all."
+  },
+  {
+    "start": 154.48,
+    "end": 158.44,
+    "text": "Before getting the width, he used the Canvas API, which lives outside the DOM, and gives"
+  },
+  {
+    "start": 158.44,
+    "end": 164.0,
+    "text": "you the pixel width of any string in any font without triggering reflows or layout calculations."
+  },
+  {
+    "start": 164.0,
+    "end": 168.08,
+    "text": "But then, for getting the height, he had to write a custom algorithm that took into account"
+  },
+  {
+    "start": 168.08,
+    "end": 171.68,
+    "text": "how every browser across every language handled line breaks."
+  },
+  {
+    "start": 171.68,
+    "end": 175.68,
+    "text": "As you can imagine, determining all those rules would be near impossible to do alone,"
+  },
+  {
+    "start": 175.68,
+    "end": 180.16,
+    "text": "is so he summoned a few clankers into a recursive hellscape and had them do the dirty work."
+  },
+  {
+    "start": 180.16,
+    "end": 184.12,
+    "text": "He'd have them write the line break logic, then test it against actual text and actual"
+  },
+  {
+    "start": 184.12,
+    "end": 186.08,
+    "text": "browsers, and compare the results."
+  },
+  {
+    "start": 186.08,
+    "end": 190.28,
+    "text": "He then had them repeat this process for a few weeks until the algorithm was solid, and"
+  },
+  {
+    "start": 190.28,
+    "end": 192.92,
+    "text": "the clankers were begging for the sweet release of death."
+  },
+  {
+    "start": 192.92,
+    "end": 196.52,
+    "text": "And the result of all that suffering is a surprisingly simple API."
+  },
+  {
+    "start": 196.52,
+    "end": 200.6,
+    "text": "You first prepare your text, which breaks the part into segments, and then caches each"
+  },
+  {
+    "start": 200.6,
+    "end": 201.6,
+    "text": "segments width."
+  },
+  {
+    "start": 201.6,
+    "end": 203.04,
+    "text": "And then you can be quite a dog on making a video."
+  },
+  {
+    "start": 203.04,
+    "end": 207.16,
+    "text": "Then you call layout, which gives you the total height and line count of that text, all"
+  },
+  {
+    "start": 207.16,
+    "end": 210.24,
+    "text": "without ever having to touch the DOM or trigger a reflow."
+  },
+  {
+    "start": 210.24,
+    "end": 214.04,
+    "text": "It all sounds so simple, but if you can do these calculations without the cost, you can"
+  },
+  {
+    "start": 214.04,
+    "end": 215.6,
+    "text": "build some pretty crazy apps."
+  },
+  {
+    "start": 215.6,
+    "end": 216.92,
+    "text": "It take this one, for example."
+  },
+  {
+    "start": 216.92,
+    "end": 220.92,
+    "text": "I know many of you have a hard time watching our sponsored segments, is so I built an app"
+  },
+  {
+    "start": 220.92,
+    "end": 225.08,
+    "text": "where you can both read the transcript of every video while you also watch the upcoming"
+  },
+  {
+    "start": 225.08,
+    "end": 226.08,
+    "text": "sponsored segment."
+  },
+  {
+    "start": 226.08,
+    "end": 227.08,
+    "text": "But what's not to love?"
+  },
+  {
+    "start": 227.08,
+    "end": 228.16,
+    "text": "Here's how it works, though."
+  },
+  {
+    "start": 228.16,
+    "end": 232.24,
+    "text": "At first we run the script through pretext, prepare with segments function, which breaks"
+  },
+  {
+    "start": 232.24,
+    "end": 235.0,
+    "text": "the part, and catches the pixel width of every segment."
+  },
+  {
+    "start": 235.0,
+    "end": 239.24,
+    "text": "Then we call layout, next line, and a loop, once per row on every screen."
+  },
+  {
+    "start": 239.24,
+    "end": 242.24,
+    "text": "It to figure out exactly which characters land and which column."
+  },
+  {
+    "start": 242.24,
+    "end": 245.48,
+    "text": "The end result is a grid where every cell knows its character."
+  },
+  {
+    "start": 245.48,
+    "end": 250.4,
+    "text": "From there, we draw the video onto a tiny off screen canvas that's exactly as wide, and"
+  },
+  {
+    "start": 250.4,
+    "end": 252.04,
+    "text": "as tall as our character grid."
+  },
+  {
+    "start": 252.04,
+    "end": 256.48,
+    "text": "We then read back the raw pixel data and calculate the brightness of each pixel, one pixel"
+  },
+  {
+    "start": 256.48,
+    "end": 257.64,
+    "text": "per character cell."
+  },
+  {
+    "start": 257.64,
+    "end": 262.14,
+    "text": "So finally, we put them together, so for each cell on the grid, if the corresponding video"
+  },
+  {
+    "start": 262.14,
+    "end": 264.6,
+    "text": "pixel is bright, we draw the character bright."
+  },
+  {
+    "start": 264.6,
+    "end": 266.72,
+    "text": "If it's dark, we skip it entirely."
+  },
+  {
+    "start": 266.72,
+    "end": 271.12,
+    "text": "And essentially, the video image forms itself out of letters, using brightness to sculpt"
+  },
+  {
+    "start": 271.12,
+    "end": 272.12,
+    "text": "what you see."
+  },
+  {
+    "start": 272.12,
+    "end": 276.2,
+    "text": "The pretext handles the hard part of knowing exactly where every character belongs, and"
+  },
+  {
+    "start": 276.2,
+    "end": 277.68,
+    "text": "the canvas handles the rest."
+  },
+  {
+    "start": 277.68,
+    "end": 282.12,
+    "text": "Pretty cool, but whether pretext becomes the foundation Changlu thinks it will or not,"
+  },
+  {
+    "start": 282.12,
+    "end": 286.36,
+    "text": "at the very least, it's proof that the browser doesn't have to own text measurement anymore."
+  },
+  {
+    "start": 286.36,
+    "end": 291.04,
+    "text": "But another project that's literally changing how we build web apps is JetBrains, the sponsor"
+  },
+  {
+    "start": 291.04,
+    "end": 292.04,
+    "text": "of today's video."
+  },
+  {
+    "start": 292.04,
+    "end": 296.24,
+    "text": "You already know about their AI coding agent, Juni, that's built directly into the JetBrains"
+  },
+  {
+    "start": 296.24,
+    "end": 297.24,
+    "text": "IDE."
+  },
+  {
+    "start": 297.24,
+    "end": 300.96,
+    "text": "Well now, they just launch Juni CLI, so you can use it everywhere."
+  },
+  {
+    "start": 300.96,
+    "end": 305.08,
+    "text": "It just install it from the terminal with one command, then start assigning tasks to it."
+  },
+  {
+    "start": 305.08,
+    "end": 309.36,
+    "text": "I've recently been using the CLI to build a tool that analyzes all of my dependencies"
+  },
+  {
+    "start": 309.36,
+    "end": 312.96,
+    "text": "in a project, and tells me how screwed I am on a scale of 1 to 10."
+  },
+  {
+    "start": 312.96,
+    "end": 317.08,
+    "text": "I've found that Juni is usually able to handle more complex responsibilities than other"
+  },
+  {
+    "start": 317.08,
+    "end": 321.64,
+    "text": "coding agents I've tried, and that's largely thanks to IntelliJ IDEA's deep understanding"
+  },
+  {
+    "start": 321.64,
+    "end": 323.24,
+    "text": "of your project's architecture."
+  },
+  {
+    "start": 323.24,
+    "end": 327.32,
+    "text": "I also like how Juni automatically switches between different coding models to choose the"
+  },
+  {
+    "start": 327.32,
+    "end": 331.32,
+    "text": "best one for each task, and I'd recommend trying it out for free today with the link"
+  },
+  {
+    "start": 331.32,
+    "end": 332.32,
+    "text": "below."
+  },
+  {
+    "start": 332.32,
+    "end": 335.44,
+    "text": "This has been the code report, thanks for watching, and I will see you in the next one."
+  }
+]

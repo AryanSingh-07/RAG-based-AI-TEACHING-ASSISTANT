@@ -3,3 +3,6 @@
 *.pt
 __pycache__/
 *.env
+.env
+.venv/
+*.pyc
