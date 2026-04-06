@@ -1,11 +1,3 @@
-Based on the provided transcript, Angular is the central framework discussed in the video. The specific mentions and contextual references occur at the following timestamps:
+Based on the provided transcripts, a concrete Angular coding example is discussed in the debugging video. The instructor walks through an example where a debugger statement is added to a component constructor and inside an RxJS subscription to pause the application and inspect it. This is covered in Angular__Top7WaystoDebugAngular4AppsgxixM90vo9Y from 02:10 to 02:53. 
 
-00:00 to 00:07 - The episode introduces the topic of properly organizing an Angular application.
-00:28 to 00:32 - The transcript references the early days of Angular 2.
-01:27 to 01:32 - It notes that the default app component is created automatically by Angular.
-03:24 to 03:30 - It explains how to access Angular's most common features.
-05:20 to 05:22 - It briefly refers back to Angular applications.
-
-Video Title: Angular__LearnNgModuleinAngularwithExamplesoqZ4-ULwfbc
-
-The entire video focuses on using NgModules to structure and manage Angular applications, with Angular being the core subject across all the provided transcript sections.
+Additionally, the Nx quickstart video uses a project scenario example involving a travel company building a front-end customer app to illustrate how to scale a JavaScript project and configure tooling. This can be found in Angular__NxQuickstart-HowtoScaleaJavaScriptProjectVUyBY72mwrQ from 02:04 to 02:42.

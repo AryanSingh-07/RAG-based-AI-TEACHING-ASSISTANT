@@ -1,34 +1,40 @@
 {
   "videos": {
+    "Angular\\Lazy Loading Components in Angular 4 [8tBQI5grhbE].mp4": {
+      "name": "Lazy Loading Components in Angular 4 [8tBQI5grhbE].mp4",
+      "canonical_name": "Lazy Loading Components in Angular 4",
+      "size": 12776362,
+      "mtime_ns": 1729556770000000000
+    },
     "Angular\\Learn NgModule in Angular with Examples [oqZ4-ULwfbc].mp4": {
       "name": "Learn NgModule in Angular with Examples [oqZ4-ULwfbc].mp4",
       "canonical_name": "Learn NgModule in Angular with Examples",
       "size": 17577448,
       "mtime_ns": 1775293578887878400
     },
-    "He just crawled through hell to fix the browser\u2026 [vd14EElCRvs].mp4": {
-      "name": "He just crawled through hell to fix the browser\u2026 [vd14EElCRvs].mp4",
-      "canonical_name": "He just crawled through hell to fix the browser\u2026",
-      "size": 25559121,
-      "mtime_ns": 1775214191674671600
+    "Angular\\Nx Quickstart - How to Scale a JavaScript Project [VUyBY72mwrQ].mp4": {
+      "name": "Nx Quickstart - How to Scale a JavaScript Project [VUyBY72mwrQ].mp4",
+      "canonical_name": "Nx Quickstart - How to Scale a JavaScript Project",
+      "size": 31889541,
+      "mtime_ns": 1709409411000000000
     },
-    "Java in 100 Seconds [l9AzO1FMgM8].webm": {
-      "name": "Java in 100 Seconds [l9AzO1FMgM8].webm",
-      "canonical_name": "Java in 100 Seconds",
-      "size": 27240761,
-      "mtime_ns": 1757841194439364100
+    "Angular\\Sharing Data between Components in Angular [I317BhehZKM].mp4": {
+      "name": "Sharing Data between Components in Angular [I317BhehZKM].mp4",
+      "canonical_name": "Sharing Data between Components in Angular",
+      "size": 22139686,
+      "mtime_ns": 1747987749000000000
     },
-    "Python in 100 Seconds [x7X9w_GIm1s].webm": {
-      "name": "Python in 100 Seconds [x7X9w_GIm1s].webm",
-      "canonical_name": "Python in 100 Seconds",
-      "size": 33437558,
-      "mtime_ns": 1757841170791002200
+    "Angular\\Top 7 RxJS Concepts for Angular Developers [65Us8NwmYf4].mp4": {
+      "name": "Top 7 RxJS Concepts for Angular Developers [65Us8NwmYf4].mp4",
+      "canonical_name": "Top 7 RxJS Concepts for Angular Developers",
+      "size": 23863983,
+      "mtime_ns": 1749896227000000000
     },
-    "TensorFlow in 100 Seconds [i8NETqtGHms].webm": {
-      "name": "TensorFlow in 100 Seconds [i8NETqtGHms].webm",
-      "canonical_name": "TensorFlow in 100 Seconds",
-      "size": 49684844,
-      "mtime_ns": 1757841077486358800
+    "Angular\\Top 7 Ways to Debug Angular 4 Apps [gxixM90vo9Y].mp4": {
+      "name": "Top 7 Ways to Debug Angular 4 Apps [gxixM90vo9Y].mp4",
+      "canonical_name": "Top 7 Ways to Debug Angular 4 Apps",
+      "size": 27116500,
+      "mtime_ns": 1736621903000000000
     }
   }
 }

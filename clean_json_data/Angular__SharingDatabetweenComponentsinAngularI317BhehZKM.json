@@ -1,0 +1,35 @@
+{
+    "chunks": [
+        {
+            "video_name": "Angular__SharingDatabetweenComponentsinAngularI317BhehZKM",
+            "text": "In this episode, I'm going to show you four different ways to share data between angular components. Parent to child via the input decorator. When you declare a variable with the input decorator in the child component, it allows that variable to be received from the parent component template. In this case, we define a message variable in the parent, and use square brackets to pass the data to the child. Now the child component can display the data in its own template. Child to parent via output and event emitter. Another way to share data is to emit it from the child, which can be listened to by the parent. This approach is ideal when you want to share data changes that occur on things like button clicks, form entries, and other user events. In the child, we declare a message event variable with the output decorator",
+            "start": 0.82,
+            "end": 68.68
+        },
+        {
+            "video_name": "Angular__SharingDatabetweenComponentsinAngularI317BhehZKM",
+            "text": "and set it equal to a new event emitter. Then we create a function named sendMessage that calls emit on this event with the message we wanna send. Lastly, we create a button to trigger this function in the HTML. In the parent, we create a function to receive the message and set it equal to the message variable. The parent can now subscribe to this message event that's outputted by the child component, then run the receiveMessage function whenever that event occurs. child to parent via view child. View child allows one component to be injected into another,",
+            "start": 68.68,
+            "end": 140.64
+        },
+        {
+            "video_name": "Angular__SharingDatabetweenComponentsinAngularI317BhehZKM",
+            "text": "giving the parent access to all of its attributes and functions. One caveat, however, is that the child won't be available until after the view is fully initialized. This means we need to implement the after view init lifecycle hook to receive the data from the child. Inside the after view init function, we can then access the message variable that was defined inside the child component. Share data between any unrelated components. When passing data between components that lack a direct connection, such as siblings, grandchildren, etc., you should use a shared service. When you have data that always needs to be in sync, I find that the RxJS behavior subject is very useful in this situation. The main benefit of a behavior subject is that it ensures every component consuming the service receives the most recent up-to-date data. In the service we create a private behavior",
+            "start": 140.64,
+            "end": 215.06
+        },
+        {
+            "video_name": "Angular__SharingDatabetweenComponentsinAngularI317BhehZKM",
+            "text": "subject that will hold the current value of the message. Then we define a current message variable set to an observable that will be used by the components. Lastly we create a function that calls next on the behavior subject to change its current value. The parent, child, and sibling components all receive the same treatment. We inject the service in the constructor, then subscribe to the current message observable, and set its value equal to the message variable. Now we can create a function in any one of these components that changes the value of the message. When this function is executed, the new data will automatically be broadcast to all of their",
+            "start": 215.06,
+            "end": 283.18
+        },
+        {
+            "video_name": "Angular__SharingDatabetweenComponentsinAngularI317BhehZKM",
+            "text": "components. That's it for data sharing. See you next time.",
+            "start": 283.18,
+            "end": 308.06
+        }
+    ],
+    "full_text": "In this episode, I'm going to show you four different ways to share data between angular components. Parent to child via the input decorator. When you declare a variable with the input decorator in the child component, it allows that variable to be received from the parent component template. In this case, we define a message variable in the parent, and use square brackets to pass the data to the child. Now the child component can display the data in its own template. Child to parent via output and event emitter. Another way to share data is to emit it from the child, which can be listened to by the parent. This approach is ideal when you want to share data changes that occur on things like button clicks, form entries, and other user events. In the child, we declare a message event variable with the output decorator and set it equal to a new event emitter. Then we create a function named sendMessage that calls emit on this event with the message we wanna send. Lastly, we create a button to trigger this function in the HTML. In the parent, we create a function to receive the message and set it equal to the message variable. The parent can now subscribe to this message event that's outputted by the child component, then run the receiveMessage function whenever that event occurs. child to parent via view child. View child allows one component to be injected into another, giving the parent access to all of its attributes and functions. One caveat, however, is that the child won't be available until after the view is fully initialized. This means we need to implement the after view init lifecycle hook to receive the data from the child. Inside the after view init function, we can then access the message variable that was defined inside the child component. Share data between any unrelated components. When passing data between components that lack a direct connection, such as siblings, grandchildren, etc., you should use a shared service. When you have data that always needs to be in sync, I find that the RxJS behavior subject is very useful in this situation. The main benefit of a behavior subject is that it ensures every component consuming the service receives the most recent up-to-date data. In the service we create a private behavior subject that will hold the current value of the message. Then we define a current message variable set to an observable that will be used by the components. Lastly we create a function that calls next on the behavior subject to change its current value. The parent, child, and sibling components all receive the same treatment. We inject the service in the constructor, then subscribe to the current message observable, and set its value equal to the message variable. Now we can create a function in any one of these components that changes the value of the message. When this function is executed, the new data will automatically be broadcast to all of their components. That's it for data sharing. See you next time."
+}
