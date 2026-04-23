@@ -1,6 +1,6 @@
 faster-whisper~=1.2.0
 joblib~=1.5.2
-numba~=0.61.2
+numba~=0.65.0
 numpy~=2.2.4
 openai~=1.107.0
 opencv-python-headless~=4.12.0.88

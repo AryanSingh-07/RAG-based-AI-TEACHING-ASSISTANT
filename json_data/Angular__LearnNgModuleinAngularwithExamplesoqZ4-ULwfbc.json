@@ -1,5 +1,5 @@
 {
-    "text": "In this episode, we're going to talk about ng-module and how to properly use it to organize an Angular application. So what's the purpose of an ng-module in the first place? The answer is it helps organize the complex relationship between views such as components and directives to data providers such as services and guards. It works by allowing you to define all these relationships in a single file as opposed to doing it individually and every component and service, this, as was the case in the early days of Angular 2. Now let's look inside an ng module and see what these metadata terms actually mean. First we have declarations, which is where you would put any component, directive, or pipe, and then it'll be privately available to that module. If you want it to be publicly available to other modules, then you'll need to add it to the export section. This concept is similar to public and private functions and object-oriented programming. will be private by default and become public if you add them to exports. Other modules gain access to exported components by importing that module in their own metadata. So just to recap, declarations, imports and exports define the relationship between components and how they're shared between different ng modules. Next we have the bootstrap property, which defines a component that's used to initially load your application. By default, this will usually be the app component, which is created automatically by the Angular CLI. The final property you should be aware of is providers. This is where you register data providers such as services and guards that can be injected into components within this module. The injectable class will be available to any component in this module, as well as any module that imports it. Now let's look at some practical ways we can use ngModule to organize an application. In this example we have all of our components and services in the root app module that was created by default. As our app grows larger, this file is going to be more and more cluttered and more and more hard to maintain. Our goal is to refactor most of our components and services to their own modules with the exception of the app component, which we still want to bootstrap from the root module. Overall this will keep the logic in our app much more organized. Now let's take a look at the routing module that was created by default by the Angular CLI. A routing module should have no declarations, it may have providers in the form of guards, and it should always export the router module. We can add our contact list component to the router, and it will load that component imperatively when the route is activated, which in this case is just the root URL. on the complexity of your app, you may use multiple routing modules for better organization as well as lazy loading. Now let's build a feature module to organize everything related to contacts in our app. Feature modules would consist mostly of declarations and possibly a provider, but they should never export anything. Their primary purpose is to organize business logic related to a specific feature. We generate the module with the Angular CLI, then copy everything related to Contacts over to it. Notice we're also importing the common module. That gives us access to Angular's most common features such as NGF and NG4. Now we can go back to the root and delete everything related to Contacts, then import the Contact module and add it to the imports in the root. If we had 20 different components related to Contacts, you can see how this would greatly improve the clutter in this file. Now let's look at a shared module, also called widget modules. They're almost identical to feature modules, except that they add all of their declarations to the exports as well, so they can be distributed to other module. Common use cases include social media icons, loading spinners, and other UI elements similar to those. Let's generate the module from the CLI, then add the social icons component to both the declarations and the exports. From there, we can go ahead and import it in both the root module, as well as the feature module we created in the previous step. Now the social icons component will be available everywhere in the app. The last type we'll look at is a core or service module. It has no declarations and only focuses on services for dependency injection. Common providers to include here would be an off service or a toast message service, anything that provides data globally throughout the app. In this example, we're extracting our off service into the core module. We generate it with the CLI, then copy over the off service to its new home. We can also remove the common module since we're only dealing with services here. Back in the root, we can go ahead and import the core module and add it to the imports with the others. If we look over our app module now, we can see it's a lot more organized. We just have the one declaration, no providers, the one bootstrap component, and just a handful of modules to manage. That covers the main patterns you'll see with NG module and Angular applications. In an upcoming video, I'll show you how to use the router along with NG modules to lazy load components. That's it for this episode. If you found the video helpful, please like and subscribe. And if you wanna support the channel, consider becoming a pro subscriber at angularfirebase.com. For just a few bucks a month, you'll get access to exclusive content, as well as free one-on-one project consulting. Thanks for watching, and I'll see you next time.",
+    "text": "In this episode, we're going to talk about ng-module and how to properly use it to organize an Angular application. So, what's the purpose of an ng-module in the first place? The answer is it helps organize the complex relationship between views such as components and directives to data providers such as services and guards. It works by allowing you to define all these relationships in a single file as opposed to doing it individually and every component and service, as was the case in the early days of Angular 2. Now let's look inside an ng-module and see what these metadata terms actually mean. First we have declarations, which is where you would put any component directive or pipe, and then it'll be privately available to that module. If you want it to be publicly available to other modules, then you'll need to add it to the export section. This concept is similar to public and private functions and object-oriented programming. Components will be private by default and become public if you add them to exports. Other modules gain access to exported components by importing that module in their own metadata. So just to recap, declarations, imports and exports define the relationship between components and how they're shared between different ng modules. Next we have the bootstrap property, which defines a component that's used to initially load your application. By default, this will usually be the app component which is created automatically by the Angular CLI. The final property you should be aware of is providers. This is where you register data providers such as services and guards that can be injected into components within this module. The injectable class will be available to any component in this module as well as any module that imports it. Now let's look at some practical ways we can use ngModule to organize an application. In this example we have all of our components and services in the root app module that was created by default. As our app grows larger, this file is going to be more and more cluttered and more and more hard to maintain. Our goal is to refactor most of our components and services to their own modules, with the exception of the app component, which we still want to bootstrap from the root module. Overall this will keep the logic in our app much more organized. Now let's take a look at the routing module that was created by default by the Angular CLI. A routing module should have no declarations, it may have providers in the form of guards, and it should always export the router module. We can add our contact list component to the router, and it will load that component imperatively when the route is activated, which in this case is just the root URL. on the complexity of your app you may use multiple routing modules for better organization as well as lazy loading. Now let's build a feature module to organize everything related to contacts in our app. Feature modules would consist mostly of declarations and possibly a provider but they should never export anything. Their primary purpose is to organize business logic related to a specific feature. We generate the module with the Angular CLI then copy everything related to contacts over to it. Notice we're also importing the common module that gives us access to Angular's most common features such as NGF and NG4. Now we can go back to the root and delete everything related to contacts then import the contact module and add it to the imports in the root. If we had 20 different components related to contacts you can see how this would greatly improve the clutter in this file. Now let's look at a shared module. Also called widget modules, they're almost identical to feature modules except that they add all of their declarations to the exports as well so they can be distributed to other modules. Common use cases include social media icons, loading spinners, and other UI elements similar to those. Let's generate the module from the CLI, then add the social icons component to both the declarations and the exports. From there we can go ahead and import it in both the root module as well as the feature module we created in the previous step. Now the social icons component will be available everywhere in the app. The last type we'll look at is a core or service module. It has no declarations and only focuses on services for dependency injection. Common providers to include here would be an an off service or a toast message service, anything that provides data globally throughout the app. In this example, we're extracting our off service into the core module. We generate it with the CLI, then copy over the off service to its new home. We can also remove the common module since we're only dealing with services here. Back in the root, we can go ahead and import the core module and add it to the imports with the others. If we look over our app module now we can see it's a lot more organized. We just have the one declaration, no providers, the one bootstrap component, and just a handful of modules to manage. That covers the main patterns you'll see with NG module and Angular applications. In an upcoming video I'll show you how to use the router along with NG modules to lazy load components. That's it for this episode. If you found the video helpful please like and subscribe. And if you want to support the channel consider becoming a pro subscriber at AngularFireBase.com. For just a few bucks a month you'll get access to exclusive content as well as free one-on-one project consulting. Thanks for watching and I'll see you next time.",
     "segments": [
         {
             "id": 1,
@@ -38,19 +38,20 @@
                 50714
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1510307205697665,
-            "compression_ratio": 1.7028985507246377,
-            "no_speech_prob": 0.025784142315387726
+            "avg_logprob": -0.14613615898858934,
+            "compression_ratio": 1.7065217391304348,
+            "no_speech_prob": 0.025478629395365715
         },
         {
             "id": 2,
             "seek": 0,
             "start": 7.14,
             "end": 11.14,
-            "text": "So what's the purpose of an ng-module in the first place?",
+            "text": "So, what's the purpose of an ng-module in the first place?",
             "tokens": [
                 50714,
                 407,
+                11,
                 437,
                 311,
                 264,
@@ -69,9 +70,9 @@
                 50914
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1510307205697665,
-            "compression_ratio": 1.7028985507246377,
-            "no_speech_prob": 0.025784142315387726
+            "avg_logprob": -0.14613615898858934,
+            "compression_ratio": 1.7065217391304348,
+            "no_speech_prob": 0.025478629395365715
         },
         {
             "id": 3,
@@ -110,9 +111,9 @@
                 51364
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1510307205697665,
-            "compression_ratio": 1.7028985507246377,
-            "no_speech_prob": 0.025784142315387726
+            "avg_logprob": -0.14613615898858934,
+            "compression_ratio": 1.7065217391304348,
+            "no_speech_prob": 0.025478629395365715
         },
         {
             "id": 4,
@@ -151,20 +152,18 @@
                 51764
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1510307205697665,
-            "compression_ratio": 1.7028985507246377,
-            "no_speech_prob": 0.025784142315387726
+            "avg_logprob": -0.14613615898858934,
+            "compression_ratio": 1.7065217391304348,
+            "no_speech_prob": 0.025478629395365715
         },
         {
             "id": 5,
             "seek": 2800,
             "start": 28.14,
-            "end": 32.5,
-            "text": "this, as was the case in the early days of Angular 2.",
+            "end": 33.34,
+            "text": "as was the case in the early days of Angular 2. Now let's look inside an",
             "tokens": [
                 50364,
-                341,
-                11,
                 382,
                 390,
                 264,
@@ -177,29 +176,31 @@
                 34107,
                 568,
                 13,
-                50582
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
-        },
-        {
-            "id": 6,
-            "seek": 2800,
-            "start": 32.5,
-            "end": 37.26,
-            "text": "Now let's look inside an ng module and see what these metadata terms actually mean.",
-            "tokens": [
-                50582,
                 823,
                 718,
                 311,
                 574,
                 1854,
                 364,
+                50624
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1463509911188373,
+            "compression_ratio": 1.6407407407407408,
+            "no_speech_prob": 0.12307116389274597
+        },
+        {
+            "id": 6,
+            "seek": 2800,
+            "start": 33.34,
+            "end": 37.46,
+            "text": "ng-module and see what these metadata terms actually mean. First we have",
+            "tokens": [
+                50624,
                 6415,
-                10088,
+                12,
+                8014,
+                2271,
                 293,
                 536,
                 437,
@@ -209,24 +210,24 @@
                 767,
                 914,
                 13,
-                50820
+                2386,
+                321,
+                362,
+                50830
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
+            "avg_logprob": -0.1463509911188373,
+            "compression_ratio": 1.6407407407407408,
+            "no_speech_prob": 0.12307116389274597
         },
         {
             "id": 7,
             "seek": 2800,
-            "start": 37.26,
-            "end": 41.22,
-            "text": "First we have declarations, which is where you would put any component, directive, or",
+            "start": 37.46,
+            "end": 41.86,
+            "text": "declarations, which is where you would put any component directive or pipe, and",
             "tokens": [
-                50820,
-                2386,
-                321,
-                362,
+                50830,
                 16694,
                 763,
                 11,
@@ -238,28 +239,26 @@
                 829,
                 604,
                 6542,
-                11,
                 45444,
-                11,
                 420,
-                51018
+                11240,
+                11,
+                293,
+                51050
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
+            "avg_logprob": -0.1463509911188373,
+            "compression_ratio": 1.6407407407407408,
+            "no_speech_prob": 0.12307116389274597
         },
         {
             "id": 8,
             "seek": 2800,
-            "start": 41.22,
-            "end": 45.14,
-            "text": "pipe, and then it'll be privately available to that module.",
+            "start": 41.86,
+            "end": 45.78,
+            "text": "then it'll be privately available to that module. If you want it to be",
             "tokens": [
-                51018,
-                11240,
-                11,
-                293,
+                51050,
                 550,
                 309,
                 603,
@@ -270,27 +269,27 @@
                 300,
                 10088,
                 13,
-                51214
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
-        },
-        {
-            "id": 9,
-            "seek": 2800,
-            "start": 45.14,
-            "end": 49.06,
-            "text": "If you want it to be publicly available to other modules, then you'll need to add",
-            "tokens": [
-                51214,
                 759,
                 291,
                 528,
                 309,
                 281,
                 312,
+                51246
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1463509911188373,
+            "compression_ratio": 1.6407407407407408,
+            "no_speech_prob": 0.12307116389274597
+        },
+        {
+            "id": 9,
+            "seek": 2800,
+            "start": 45.78,
+            "end": 49.34,
+            "text": "publicly available to other modules, then you'll need to add it to the",
+            "tokens": [
+                51246,
                 14843,
                 2435,
                 281,
@@ -303,42 +302,27 @@
                 643,
                 281,
                 909,
-                51410
+                309,
+                281,
+                264,
+                51424
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
+            "avg_logprob": -0.1463509911188373,
+            "compression_ratio": 1.6407407407407408,
+            "no_speech_prob": 0.12307116389274597
         },
         {
             "id": 10,
             "seek": 2800,
-            "start": 49.06,
-            "end": 51.54,
-            "text": "it to the export section.",
+            "start": 49.34,
+            "end": 54.42,
+            "text": "export section. This concept is similar to public and private functions and",
             "tokens": [
-                51410,
-                309,
-                281,
-                264,
+                51424,
                 10725,
                 3541,
                 13,
-                51534
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
-        },
-        {
-            "id": 11,
-            "seek": 2800,
-            "start": 51.54,
-            "end": 57.54,
-            "text": "This concept is similar to public and private functions and object-oriented programming.",
-            "tokens": [
-                51534,
                 639,
                 3410,
                 307,
@@ -349,26 +333,43 @@
                 4551,
                 6828,
                 293,
+                51678
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1463509911188373,
+            "compression_ratio": 1.6407407407407408,
+            "no_speech_prob": 0.12307116389274597
+        },
+        {
+            "id": 11,
+            "seek": 5428,
+            "start": 54.42,
+            "end": 57.52,
+            "text": "object-oriented programming.",
+            "tokens": [
+                50364,
                 2657,
                 12,
                 27414,
                 9410,
                 13,
-                51834
+                50519
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16627243594226673,
-            "compression_ratio": 1.6494845360824741,
-            "no_speech_prob": 0.11150896549224854
+            "avg_logprob": -0.13962059825037917,
+            "compression_ratio": 1.7049808429118773,
+            "no_speech_prob": 0.0028671142645180225
         },
         {
             "id": 12,
-            "seek": 5740,
-            "start": 57.54,
-            "end": 62.3,
-            "text": "will be private by default and become public if you add them to exports.",
+            "seek": 5428,
+            "start": 57.52,
+            "end": 62.28,
+            "text": "Components will be private by default and become public if you add them to exports.",
             "tokens": [
-                50364,
+                50519,
+                6620,
+                40496,
                 486,
                 312,
                 4551,
@@ -384,21 +385,21 @@
                 281,
                 31428,
                 13,
-                50602
+                50757
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13436672059438562,
-            "compression_ratio": 1.7258064516129032,
-            "no_speech_prob": 0.004509596154093742
+            "avg_logprob": -0.13962059825037917,
+            "compression_ratio": 1.7049808429118773,
+            "no_speech_prob": 0.0028671142645180225
         },
         {
             "id": 13,
-            "seek": 5740,
-            "start": 62.3,
-            "end": 70.09,
+            "seek": 5428,
+            "start": 62.28,
+            "end": 70.07,
             "text": "Other modules gain access to exported components by importing that module in their own metadata.",
             "tokens": [
-                50602,
+                50757,
                 5358,
                 16679,
                 6052,
@@ -415,21 +416,21 @@
                 1065,
                 26603,
                 13,
-                50908
+                51063
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13436672059438562,
-            "compression_ratio": 1.7258064516129032,
-            "no_speech_prob": 0.004509596154093742
+            "avg_logprob": -0.13962059825037917,
+            "compression_ratio": 1.7049808429118773,
+            "no_speech_prob": 0.0028671142645180225
         },
         {
             "id": 14,
-            "seek": 5740,
-            "start": 70.09,
-            "end": 76.21,
+            "seek": 5428,
+            "start": 70.07,
+            "end": 76.19,
             "text": "So just to recap, declarations, imports and exports define the relationship between components",
             "tokens": [
-                50908,
+                51063,
                 407,
                 445,
                 281,
@@ -446,21 +447,21 @@
                 2480,
                 1296,
                 6677,
-                51214
+                51369
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13436672059438562,
-            "compression_ratio": 1.7258064516129032,
-            "no_speech_prob": 0.004509596154093742
+            "avg_logprob": -0.13962059825037917,
+            "compression_ratio": 1.7049808429118773,
+            "no_speech_prob": 0.0028671142645180225
         },
         {
             "id": 15,
-            "seek": 5740,
-            "start": 76.21,
-            "end": 80.25,
+            "seek": 5428,
+            "start": 76.19,
+            "end": 80.23,
             "text": "and how they're shared between different ng modules.",
             "tokens": [
-                51214,
+                51369,
                 293,
                 577,
                 436,
@@ -471,21 +472,21 @@
                 6415,
                 16679,
                 13,
-                51416
+                51571
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13436672059438562,
-            "compression_ratio": 1.7258064516129032,
-            "no_speech_prob": 0.004509596154093742
+            "avg_logprob": -0.13962059825037917,
+            "compression_ratio": 1.7049808429118773,
+            "no_speech_prob": 0.0028671142645180225
         },
         {
             "id": 16,
-            "seek": 5740,
-            "start": 80.25,
-            "end": 85.05,
+            "seek": 5428,
+            "start": 80.23,
+            "end": 85.07,
             "text": "Next we have the bootstrap property, which defines a component that's used to initially",
             "tokens": [
-                51416,
+                51571,
                 3087,
                 321,
                 362,
@@ -504,40 +505,25 @@
                 1143,
                 281,
                 9105,
-                51656
+                51813
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13436672059438562,
-            "compression_ratio": 1.7258064516129032,
-            "no_speech_prob": 0.004509596154093742
+            "avg_logprob": -0.13962059825037917,
+            "compression_ratio": 1.7049808429118773,
+            "no_speech_prob": 0.0028671142645180225
         },
         {
             "id": 17,
-            "seek": 5740,
-            "start": 85.05,
-            "end": 86.73,
-            "text": "load your application.",
+            "seek": 8326,
+            "start": 85.07,
+            "end": 90.03,
+            "text": "load your application. By default, this will usually be the app component which is created",
             "tokens": [
-                51656,
+                50364,
                 3677,
                 428,
                 3861,
                 13,
-                51740
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13436672059438562,
-            "compression_ratio": 1.7258064516129032,
-            "no_speech_prob": 0.004509596154093742
-        },
-        {
-            "id": 18,
-            "seek": 8492,
-            "start": 86.73,
-            "end": 91.57,
-            "text": "By default, this will usually be the app component, which is created automatically by the Angular",
-            "tokens": [
-                50364,
                 3146,
                 7576,
                 11,
@@ -548,47 +534,31 @@
                 264,
                 724,
                 6542,
-                11,
                 597,
                 307,
                 2942,
+                50612
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1217889274109383,
+            "compression_ratio": 1.6981132075471699,
+            "no_speech_prob": 0.02079044282436371
+        },
+        {
+            "id": 18,
+            "seek": 8326,
+            "start": 90.03,
+            "end": 97.15,
+            "text": "automatically by the Angular CLI. The final property you should be aware of is providers.",
+            "tokens": [
+                50612,
                 6772,
                 538,
                 264,
                 34107,
-                50606
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
-        },
-        {
-            "id": 19,
-            "seek": 8492,
-            "start": 91.57,
-            "end": 94.07,
-            "text": "CLI.",
-            "tokens": [
-                50606,
                 12855,
                 40,
                 13,
-                50731
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
-        },
-        {
-            "id": 20,
-            "seek": 8492,
-            "start": 94.07,
-            "end": 97.21,
-            "text": "The final property you should be aware of is providers.",
-            "tokens": [
-                50731,
                 440,
                 2572,
                 4707,
@@ -600,21 +570,21 @@
                 307,
                 11330,
                 13,
-                50888
+                50968
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
+            "avg_logprob": -0.1217889274109383,
+            "compression_ratio": 1.6981132075471699,
+            "no_speech_prob": 0.02079044282436371
         },
         {
-            "id": 21,
-            "seek": 8492,
-            "start": 97.21,
-            "end": 101.65,
+            "id": 19,
+            "seek": 8326,
+            "start": 97.15,
+            "end": 101.63,
             "text": "This is where you register data providers such as services and guards that can be injected",
             "tokens": [
-                50888,
+                50968,
                 639,
                 307,
                 689,
@@ -631,42 +601,27 @@
                 393,
                 312,
                 36967,
-                51110
+                51192
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
+            "avg_logprob": -0.1217889274109383,
+            "compression_ratio": 1.6981132075471699,
+            "no_speech_prob": 0.02079044282436371
         },
         {
-            "id": 22,
-            "seek": 8492,
-            "start": 101.65,
-            "end": 104.29,
-            "text": "into components within this module.",
+            "id": 20,
+            "seek": 8326,
+            "start": 101.63,
+            "end": 106.91,
+            "text": "into components within this module. The injectable class will be available to any component",
             "tokens": [
-                51110,
+                51192,
                 666,
                 6677,
                 1951,
                 341,
                 10088,
                 13,
-                51242
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
-        },
-        {
-            "id": 23,
-            "seek": 8492,
-            "start": 104.29,
-            "end": 108.77,
-            "text": "The injectable class will be available to any component in this module, as well as any",
-            "tokens": [
-                51242,
                 440,
                 10711,
                 712,
@@ -677,49 +632,33 @@
                 281,
                 604,
                 6542,
+                51456
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1217889274109383,
+            "compression_ratio": 1.6981132075471699,
+            "no_speech_prob": 0.02079044282436371
+        },
+        {
+            "id": 21,
+            "seek": 8326,
+            "start": 106.91,
+            "end": 112.95,
+            "text": "in this module as well as any module that imports it. Now let's look at some practical",
+            "tokens": [
+                51456,
                 294,
                 341,
                 10088,
-                11,
                 382,
                 731,
                 382,
                 604,
-                51466
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
-        },
-        {
-            "id": 24,
-            "seek": 8492,
-            "start": 108.77,
-            "end": 111.81,
-            "text": "module that imports it.",
-            "tokens": [
-                51466,
                 10088,
                 300,
                 41596,
                 309,
                 13,
-                51618
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12919495246743642,
-            "compression_ratio": 1.6995708154506437,
-            "no_speech_prob": 0.0026206602342426777
-        },
-        {
-            "id": 25,
-            "seek": 11000,
-            "start": 111.81,
-            "end": 116.81,
-            "text": "Now let's look at some practical ways we can use ngModule to organize an application.",
-            "tokens": [
-                50364,
                 823,
                 718,
                 311,
@@ -727,6 +666,21 @@
                 412,
                 512,
                 8496,
+                51758
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1217889274109383,
+            "compression_ratio": 1.6981132075471699,
+            "no_speech_prob": 0.02079044282436371
+        },
+        {
+            "id": 22,
+            "seek": 11114,
+            "start": 112.95,
+            "end": 118.95,
+            "text": "ways we can use ngModule to organize an application. In this example we have all of our components",
+            "tokens": [
+                50364,
                 2098,
                 321,
                 393,
@@ -740,21 +694,6 @@
                 364,
                 3861,
                 13,
-                50614
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
-        },
-        {
-            "id": 26,
-            "seek": 11000,
-            "start": 116.81,
-            "end": 121.91,
-            "text": "In this example we have all of our components and services in the root app module that was",
-            "tokens": [
-                50614,
                 682,
                 341,
                 1365,
@@ -764,6 +703,21 @@
                 295,
                 527,
                 6677,
+                50664
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.11436092567443848,
+            "compression_ratio": 1.823321554770318,
+            "no_speech_prob": 0.023365721106529236
+        },
+        {
+            "id": 23,
+            "seek": 11114,
+            "start": 118.95,
+            "end": 125.31,
+            "text": "and services in the root app module that was created by default. As our app grows larger,",
+            "tokens": [
+                50664,
                 293,
                 3328,
                 294,
@@ -773,46 +727,31 @@
                 10088,
                 300,
                 390,
-                50869
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
-        },
-        {
-            "id": 27,
-            "seek": 11000,
-            "start": 121.91,
-            "end": 124.07,
-            "text": "created by default.",
-            "tokens": [
-                50869,
                 2942,
                 538,
                 7576,
                 13,
-                50977
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
-        },
-        {
-            "id": 28,
-            "seek": 11000,
-            "start": 124.07,
-            "end": 127.81,
-            "text": "As our app grows larger, this file is going to be more and more cluttered and more and",
-            "tokens": [
-                50977,
                 1018,
                 527,
                 724,
                 13156,
                 4833,
                 11,
+                50982
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.11436092567443848,
+            "compression_ratio": 1.823321554770318,
+            "no_speech_prob": 0.023365721106529236
+        },
+        {
+            "id": 24,
+            "seek": 11114,
+            "start": 125.31,
+            "end": 129.31,
+            "text": "this file is going to be more and more cluttered and more and more hard to maintain. Our goal",
+            "tokens": [
+                50982,
                 341,
                 3991,
                 307,
@@ -827,43 +766,28 @@
                 293,
                 544,
                 293,
-                51164
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
-        },
-        {
-            "id": 29,
-            "seek": 11000,
-            "start": 127.81,
-            "end": 129.07,
-            "text": "more hard to maintain.",
-            "tokens": [
-                51164,
                 544,
                 1152,
                 281,
                 6909,
                 13,
-                51227
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
-        },
-        {
-            "id": 30,
-            "seek": 11000,
-            "start": 129.07,
-            "end": 133.13,
-            "text": "Our goal is to refactor most of our components and services to their own modules with the",
-            "tokens": [
-                51227,
                 2621,
                 3387,
+                51182
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.11436092567443848,
+            "compression_ratio": 1.823321554770318,
+            "no_speech_prob": 0.023365721106529236
+        },
+        {
+            "id": 25,
+            "seek": 11114,
+            "start": 129.31,
+            "end": 133.51,
+            "text": "is to refactor most of our components and services to their own modules, with the exception",
+            "tokens": [
+                51182,
                 307,
                 281,
                 1895,
@@ -878,24 +802,25 @@
                 641,
                 1065,
                 16679,
+                11,
                 365,
                 264,
-                51430
+                11183,
+                51392
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
+            "avg_logprob": -0.11436092567443848,
+            "compression_ratio": 1.823321554770318,
+            "no_speech_prob": 0.023365721106529236
         },
         {
-            "id": 31,
-            "seek": 11000,
-            "start": 133.13,
-            "end": 137.81,
-            "text": "exception of the app component, which we still want to bootstrap from the root module.",
+            "id": 26,
+            "seek": 11114,
+            "start": 133.51,
+            "end": 137.83,
+            "text": "of the app component, which we still want to bootstrap from the root module. Overall",
             "tokens": [
-                51430,
-                11183,
+                51392,
                 295,
                 264,
                 724,
@@ -914,22 +839,22 @@
                 5593,
                 10088,
                 13,
-                51664
+                18420,
+                51608
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
+            "avg_logprob": -0.11436092567443848,
+            "compression_ratio": 1.823321554770318,
+            "no_speech_prob": 0.023365721106529236
         },
         {
-            "id": 32,
-            "seek": 11000,
-            "start": 137.81,
-            "end": 141.45,
-            "text": "Overall this will keep the logic in our app much more organized.",
+            "id": 27,
+            "seek": 11114,
+            "start": 137.83,
+            "end": 141.43,
+            "text": "this will keep the logic in our app much more organized.",
             "tokens": [
-                51664,
-                18420,
+                51608,
                 341,
                 486,
                 1066,
@@ -942,18 +867,18 @@
                 544,
                 9983,
                 13,
-                51846
+                51788
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.12851794980190417,
-            "compression_ratio": 1.8026315789473684,
-            "no_speech_prob": 0.015450289472937584
+            "avg_logprob": -0.11436092567443848,
+            "compression_ratio": 1.823321554770318,
+            "no_speech_prob": 0.023365721106529236
         },
         {
-            "id": 33,
-            "seek": 13964,
-            "start": 141.45,
-            "end": 145.25,
+            "id": 28,
+            "seek": 13962,
+            "start": 141.43,
+            "end": 145.23,
             "text": "Now let's take a look at the routing module that was created by default by the Angular",
             "tokens": [
                 50364,
@@ -978,15 +903,15 @@
                 50554
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15321307568525783,
+            "avg_logprob": -0.14812125569703627,
             "compression_ratio": 1.6893617021276597,
-            "no_speech_prob": 0.011209149844944477
+            "no_speech_prob": 0.012339562177658081
         },
         {
-            "id": 34,
-            "seek": 13964,
-            "start": 145.25,
-            "end": 146.75,
+            "id": 29,
+            "seek": 13962,
+            "start": 145.23,
+            "end": 146.73,
             "text": "CLI.",
             "tokens": [
                 50554,
@@ -996,14 +921,14 @@
                 50629
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15321307568525783,
+            "avg_logprob": -0.14812125569703627,
             "compression_ratio": 1.6893617021276597,
-            "no_speech_prob": 0.011209149844944477
+            "no_speech_prob": 0.012339562177658081
         },
         {
-            "id": 35,
-            "seek": 13964,
-            "start": 146.75,
+            "id": 30,
+            "seek": 13962,
+            "start": 146.73,
             "end": 153.23,
             "text": "A routing module should have no declarations, it may have providers in the form of guards,",
             "tokens": [
@@ -1027,21 +952,21 @@
                 295,
                 17652,
                 11,
-                50953
+                50954
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15321307568525783,
+            "avg_logprob": -0.14812125569703627,
             "compression_ratio": 1.6893617021276597,
-            "no_speech_prob": 0.011209149844944477
+            "no_speech_prob": 0.012339562177658081
         },
         {
-            "id": 36,
-            "seek": 13964,
+            "id": 31,
+            "seek": 13962,
             "start": 153.23,
             "end": 157.27,
             "text": "and it should always export the router module.",
             "tokens": [
-                50953,
+                50954,
                 293,
                 309,
                 820,
@@ -1051,21 +976,21 @@
                 22492,
                 10088,
                 13,
-                51155
+                51156
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15321307568525783,
+            "avg_logprob": -0.14812125569703627,
             "compression_ratio": 1.6893617021276597,
-            "no_speech_prob": 0.011209149844944477
+            "no_speech_prob": 0.012339562177658081
         },
         {
-            "id": 37,
-            "seek": 13964,
+            "id": 32,
+            "seek": 13962,
             "start": 157.27,
             "end": 161.59,
             "text": "We can add our contact list component to the router, and it will load that component",
             "tokens": [
-                51155,
+                51156,
                 492,
                 393,
                 909,
@@ -1083,21 +1008,21 @@
                 3677,
                 300,
                 6542,
-                51371
+                51372
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15321307568525783,
+            "avg_logprob": -0.14812125569703627,
             "compression_ratio": 1.6893617021276597,
-            "no_speech_prob": 0.011209149844944477
+            "no_speech_prob": 0.012339562177658081
         },
         {
-            "id": 38,
-            "seek": 13964,
+            "id": 33,
+            "seek": 13962,
             "start": 161.59,
             "end": 169.11,
             "text": "imperatively when the route is activated, which in this case is just the root URL.",
             "tokens": [
-                51371,
+                51372,
                 10100,
                 19020,
                 562,
@@ -1116,19 +1041,19 @@
                 5593,
                 12905,
                 13,
-                51747
+                51748
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15321307568525783,
+            "avg_logprob": -0.14812125569703627,
             "compression_ratio": 1.6893617021276597,
-            "no_speech_prob": 0.011209149844944477
+            "no_speech_prob": 0.012339562177658081
         },
         {
-            "id": 39,
+            "id": 34,
             "seek": 16730,
             "start": 169.11,
-            "end": 173.83,
-            "text": "on the complexity of your app, you may use multiple routing modules for better organization",
+            "end": 172.89,
+            "text": "on the complexity of your app you may use multiple routing modules for better",
             "tokens": [
                 50364,
                 322,
@@ -1137,7 +1062,6 @@
                 295,
                 428,
                 724,
-                11,
                 291,
                 815,
                 764,
@@ -1146,43 +1070,28 @@
                 16679,
                 337,
                 1101,
-                4475,
-                50600
+                50553
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13850283013148743,
-            "compression_ratio": 1.662551440329218,
-            "no_speech_prob": 0.013612398877739906
+            "avg_logprob": -0.14132370899633034,
+            "compression_ratio": 1.6764705882352942,
+            "no_speech_prob": 0.014949445612728596
         },
         {
-            "id": 40,
+            "id": 35,
             "seek": 16730,
-            "start": 173.83,
-            "end": 176.63,
-            "text": "as well as lazy loading.",
+            "start": 172.89,
+            "end": 178.55,
+            "text": "organization as well as lazy loading. Now let's build a feature module to",
             "tokens": [
-                50600,
+                50553,
+                4475,
                 382,
                 731,
                 382,
                 14847,
                 15114,
                 13,
-                50740
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13850283013148743,
-            "compression_ratio": 1.662551440329218,
-            "no_speech_prob": 0.013612398877739906
-        },
-        {
-            "id": 41,
-            "seek": 16730,
-            "start": 176.63,
-            "end": 182.91,
-            "text": "Now let's build a feature module to organize everything related to contacts in our app.",
-            "tokens": [
-                50740,
                 823,
                 718,
                 311,
@@ -1191,6 +1100,21 @@
                 4111,
                 10088,
                 281,
+                50836
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.14132370899633034,
+            "compression_ratio": 1.6764705882352942,
+            "no_speech_prob": 0.014949445612728596
+        },
+        {
+            "id": 36,
+            "seek": 16730,
+            "start": 178.55,
+            "end": 183.85,
+            "text": "organize everything related to contacts in our app. Feature modules would consist",
+            "tokens": [
+                50836,
                 13859,
                 1203,
                 4077,
@@ -1200,26 +1124,26 @@
                 527,
                 724,
                 13,
-                51054
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13850283013148743,
-            "compression_ratio": 1.662551440329218,
-            "no_speech_prob": 0.013612398877739906
-        },
-        {
-            "id": 42,
-            "seek": 16730,
-            "start": 182.91,
-            "end": 187.43,
-            "text": "Feature modules would consist mostly of declarations and possibly a provider, but they should",
-            "tokens": [
-                51054,
                 3697,
                 1503,
                 16679,
                 576,
                 4603,
+                51101
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.14132370899633034,
+            "compression_ratio": 1.6764705882352942,
+            "no_speech_prob": 0.014949445612728596
+        },
+        {
+            "id": 37,
+            "seek": 16730,
+            "start": 183.85,
+            "end": 188.39,
+            "text": "mostly of declarations and possibly a provider but they should never export",
+            "tokens": [
+                51101,
                 5240,
                 295,
                 16694,
@@ -1228,44 +1152,28 @@
                 6264,
                 257,
                 12398,
-                11,
                 457,
                 436,
                 820,
-                51280
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13850283013148743,
-            "compression_ratio": 1.662551440329218,
-            "no_speech_prob": 0.013612398877739906
-        },
-        {
-            "id": 43,
-            "seek": 16730,
-            "start": 187.43,
-            "end": 189.39,
-            "text": "never export anything.",
-            "tokens": [
-                51280,
                 1128,
                 10725,
-                1340,
-                13,
-                51378
+                51328
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13850283013148743,
-            "compression_ratio": 1.662551440329218,
-            "no_speech_prob": 0.013612398877739906
+            "avg_logprob": -0.14132370899633034,
+            "compression_ratio": 1.6764705882352942,
+            "no_speech_prob": 0.014949445612728596
         },
         {
-            "id": 44,
+            "id": 38,
             "seek": 16730,
-            "start": 189.39,
-            "end": 194.83,
-            "text": "Their primary purpose is to organize business logic related to a specific feature.",
+            "start": 188.39,
+            "end": 192.79,
+            "text": "anything. Their primary purpose is to organize business logic related to a",
             "tokens": [
-                51378,
+                51328,
+                1340,
+                13,
                 6710,
                 6194,
                 4334,
@@ -1277,24 +1185,24 @@
                 4077,
                 281,
                 257,
+                51548
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.14132370899633034,
+            "compression_ratio": 1.6764705882352942,
+            "no_speech_prob": 0.014949445612728596
+        },
+        {
+            "id": 39,
+            "seek": 16730,
+            "start": 192.79,
+            "end": 198.07,
+            "text": "specific feature. We generate the module with the Angular CLI then copy",
+            "tokens": [
+                51548,
                 2685,
                 4111,
                 13,
-                51650
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13850283013148743,
-            "compression_ratio": 1.662551440329218,
-            "no_speech_prob": 0.013612398877739906
-        },
-        {
-            "id": 45,
-            "seek": 19302,
-            "start": 194.83,
-            "end": 199.71,
-            "text": "We generate the module with the Angular CLI, then copy everything related to Contacts",
-            "tokens": [
-                50364,
                 492,
                 8460,
                 264,
@@ -1304,48 +1212,31 @@
                 34107,
                 12855,
                 40,
-                11,
                 550,
                 5055,
+                51812
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.14132370899633034,
+            "compression_ratio": 1.6764705882352942,
+            "no_speech_prob": 0.014949445612728596
+        },
+        {
+            "id": 40,
+            "seek": 19626,
+            "start": 198.07,
+            "end": 203.01,
+            "text": "everything related to contacts over to it. Notice we're also importing the common",
+            "tokens": [
+                50364,
                 1203,
                 4077,
                 281,
-                4839,
-                15295,
-                50608
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
-        },
-        {
-            "id": 46,
-            "seek": 19302,
-            "start": 199.71,
-            "end": 201.63,
-            "text": "over to it.",
-            "tokens": [
-                50608,
+                15836,
                 670,
                 281,
                 309,
                 13,
-                50704
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
-        },
-        {
-            "id": 47,
-            "seek": 19302,
-            "start": 201.63,
-            "end": 203.91,
-            "text": "Notice we're also importing the common module.",
-            "tokens": [
-                50704,
                 13428,
                 321,
                 434,
@@ -1353,24 +1244,23 @@
                 43866,
                 264,
                 2689,
-                10088,
-                13,
-                50818
+                50611
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
+            "avg_logprob": -0.1488013115266095,
+            "compression_ratio": 1.7962962962962963,
+            "no_speech_prob": 0.045540109276771545
         },
         {
-            "id": 48,
-            "seek": 19302,
-            "start": 203.91,
-            "end": 210.43,
-            "text": "That gives us access to Angular's most common features such as NGF and NG4.",
+            "id": 41,
+            "seek": 19626,
+            "start": 203.01,
+            "end": 208.15,
+            "text": "module that gives us access to Angular's most common features such as NGF and",
             "tokens": [
-                50818,
-                663,
+                50611,
+                10088,
+                300,
                 2709,
                 505,
                 2105,
@@ -1386,25 +1276,25 @@
                 38,
                 37,
                 293,
+                50868
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1488013115266095,
+            "compression_ratio": 1.7962962962962963,
+            "no_speech_prob": 0.045540109276771545
+        },
+        {
+            "id": 42,
+            "seek": 19626,
+            "start": 208.15,
+            "end": 214.31,
+            "text": "NG4. Now we can go back to the root and delete everything related to contacts",
+            "tokens": [
+                50868,
                 426,
                 38,
                 19,
                 13,
-                51144
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
-        },
-        {
-            "id": 49,
-            "seek": 19302,
-            "start": 210.43,
-            "end": 215.91,
-            "text": "Now we can go back to the root and delete everything related to Contacts, then import",
-            "tokens": [
-                51144,
                 823,
                 321,
                 393,
@@ -1418,28 +1308,26 @@
                 1203,
                 4077,
                 281,
-                4839,
-                15295,
-                11,
-                550,
-                974,
-                51418
+                15836,
+                51176
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
+            "avg_logprob": -0.1488013115266095,
+            "compression_ratio": 1.7962962962962963,
+            "no_speech_prob": 0.045540109276771545
         },
         {
-            "id": 50,
-            "seek": 19302,
-            "start": 215.91,
-            "end": 219.95,
-            "text": "the Contact module and add it to the imports in the root.",
+            "id": 43,
+            "seek": 19626,
+            "start": 214.31,
+            "end": 220.15,
+            "text": "then import the contact module and add it to the imports in the root. If we had",
             "tokens": [
-                51418,
+                51176,
+                550,
+                974,
                 264,
-                30683,
+                3385,
                 10088,
                 293,
                 909,
@@ -1451,51 +1339,49 @@
                 264,
                 5593,
                 13,
-                51620
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
-        },
-        {
-            "id": 51,
-            "seek": 19302,
-            "start": 219.95,
-            "end": 223.55,
-            "text": "If we had 20 different components related to Contacts, you can see how this would",
-            "tokens": [
-                51620,
                 759,
                 321,
                 632,
+                51468
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1488013115266095,
+            "compression_ratio": 1.7962962962962963,
+            "no_speech_prob": 0.045540109276771545
+        },
+        {
+            "id": 44,
+            "seek": 19626,
+            "start": 220.15,
+            "end": 223.27,
+            "text": "20 different components related to contacts you can see how this would",
+            "tokens": [
+                51468,
                 945,
                 819,
                 6677,
                 4077,
                 281,
-                4839,
-                15295,
-                11,
+                15836,
                 291,
                 393,
                 536,
                 577,
                 341,
                 576,
-                51800
+                51624
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.16310244955514608,
-            "compression_ratio": 1.7911646586345382,
-            "no_speech_prob": 0.02719930186867714
+            "avg_logprob": -0.1488013115266095,
+            "compression_ratio": 1.7962962962962963,
+            "no_speech_prob": 0.045540109276771545
         },
         {
-            "id": 52,
-            "seek": 22174,
-            "start": 223.55,
-            "end": 226.83,
-            "text": "greatly improve the clutter in this file.",
+            "id": 45,
+            "seek": 22146,
+            "start": 223.27,
+            "end": 229.03,
+            "text": "greatly improve the clutter in this file. Now let's look at a shared module. Also",
             "tokens": [
                 50364,
                 14147,
@@ -1506,21 +1392,6 @@
                 341,
                 3991,
                 13,
-                50528
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 53,
-            "seek": 22174,
-            "start": 226.83,
-            "end": 230.63,
-            "text": "Now let's look at a shared module, also called widget modules.",
-            "tokens": [
-                50528,
                 823,
                 718,
                 311,
@@ -1529,52 +1400,51 @@
                 257,
                 5507,
                 10088,
-                11,
-                611,
+                13,
+                2743,
+                50652
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.16515016831733562,
+            "compression_ratio": 1.6881720430107527,
+            "no_speech_prob": 0.03035680390894413
+        },
+        {
+            "id": 46,
+            "seek": 22146,
+            "start": 229.03,
+            "end": 233.43,
+            "text": "called widget modules, they're almost identical to feature modules except that",
+            "tokens": [
+                50652,
                 1219,
                 34047,
                 16679,
-                13,
-                50718
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 54,
-            "seek": 22174,
-            "start": 230.63,
-            "end": 232.95,
-            "text": "They're almost identical to feature modules,",
-            "tokens": [
-                50718,
-                814,
+                11,
+                436,
                 434,
                 1920,
                 14800,
                 281,
                 4111,
                 16679,
-                11,
-                50834
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 55,
-            "seek": 22174,
-            "start": 232.95,
-            "end": 235.47,
-            "text": "except that they add all of their declarations",
-            "tokens": [
-                50834,
                 3993,
                 300,
+                50872
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.16515016831733562,
+            "compression_ratio": 1.6881720430107527,
+            "no_speech_prob": 0.03035680390894413
+        },
+        {
+            "id": 47,
+            "seek": 22146,
+            "start": 233.43,
+            "end": 237.39,
+            "text": "they add all of their declarations to the exports as well so they can be",
+            "tokens": [
+                50872,
                 436,
                 909,
                 439,
@@ -1582,66 +1452,35 @@
                 641,
                 16694,
                 763,
-                50960
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 56,
-            "seek": 22174,
-            "start": 235.47,
-            "end": 238.07,
-            "text": "to the exports as well, so they can be distributed",
-            "tokens": [
-                50960,
                 281,
                 264,
                 31428,
                 382,
                 731,
-                11,
                 370,
                 436,
                 393,
                 312,
-                12631,
-                51090
+                51070
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
+            "avg_logprob": -0.16515016831733562,
+            "compression_ratio": 1.6881720430107527,
+            "no_speech_prob": 0.03035680390894413
         },
         {
-            "id": 57,
-            "seek": 22174,
-            "start": 238.07,
-            "end": 239.47,
-            "text": "to other module.",
+            "id": 48,
+            "seek": 22146,
+            "start": 237.39,
+            "end": 242.47,
+            "text": "distributed to other modules. Common use cases include social media icons, loading",
             "tokens": [
-                51090,
+                51070,
+                12631,
                 281,
                 661,
-                10088,
+                16679,
                 13,
-                51160
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 58,
-            "seek": 22174,
-            "start": 239.47,
-            "end": 242.19,
-            "text": "Common use cases include social media icons,",
-            "tokens": [
-                51160,
                 18235,
                 764,
                 3331,
@@ -1650,22 +1489,22 @@
                 3021,
                 23308,
                 11,
-                51296
+                15114,
+                51324
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
+            "avg_logprob": -0.16515016831733562,
+            "compression_ratio": 1.6881720430107527,
+            "no_speech_prob": 0.03035680390894413
         },
         {
-            "id": 59,
-            "seek": 22174,
-            "start": 242.19,
-            "end": 246.23,
-            "text": "loading spinners, and other UI elements similar to those.",
+            "id": 49,
+            "seek": 22146,
+            "start": 242.47,
+            "end": 247.55,
+            "text": "spinners, and other UI elements similar to those. Let's generate the module from",
             "tokens": [
-                51296,
-                15114,
+                51324,
                 6060,
                 2999,
                 11,
@@ -1677,94 +1516,63 @@
                 281,
                 729,
                 13,
-                51498
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 60,
-            "seek": 22174,
-            "start": 246.23,
-            "end": 248.63,
-            "text": "Let's generate the module from the CLI,",
-            "tokens": [
-                51498,
                 961,
                 311,
                 8460,
                 264,
                 10088,
                 490,
+                51578
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.16515016831733562,
+            "compression_ratio": 1.6881720430107527,
+            "no_speech_prob": 0.03035680390894413
+        },
+        {
+            "id": 50,
+            "seek": 22146,
+            "start": 247.55,
+            "end": 252.47,
+            "text": "the CLI, then add the social icons component to both the declarations and",
+            "tokens": [
+                51578,
                 264,
                 12855,
                 40,
                 11,
-                51618
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 61,
-            "seek": 22174,
-            "start": 248.63,
-            "end": 250.63,
-            "text": "then add the social icons component",
-            "tokens": [
-                51618,
                 550,
                 909,
                 264,
                 2093,
                 23308,
                 6542,
-                51718
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.13980699889361858,
-            "compression_ratio": 1.6407407407407408,
-            "no_speech_prob": 0.024841032922267914
-        },
-        {
-            "id": 62,
-            "seek": 24882,
-            "start": 250.63,
-            "end": 253.51,
-            "text": "to both the declarations and the exports.",
-            "tokens": [
-                50364,
                 281,
                 1293,
                 264,
                 16694,
                 763,
                 293,
+                51824
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.16515016831733562,
+            "compression_ratio": 1.6881720430107527,
+            "no_speech_prob": 0.03035680390894413
+        },
+        {
+            "id": 51,
+            "seek": 25066,
+            "start": 252.47,
+            "end": 257.87,
+            "text": "the exports. From there we can go ahead and import it in both the root module as",
+            "tokens": [
+                50364,
                 264,
                 31428,
                 13,
-                50508
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 63,
-            "seek": 24882,
-            "start": 254.95,
-            "end": 256.63,
-            "text": "From there, we can go ahead and import it",
-            "tokens": [
-                50580,
                 3358,
                 456,
-                11,
                 321,
                 393,
                 352,
@@ -1772,43 +1580,27 @@
                 293,
                 974,
                 309,
-                50664
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 64,
-            "seek": 24882,
-            "start": 256.63,
-            "end": 257.99,
-            "text": "in both the root module,",
-            "tokens": [
-                50664,
                 294,
                 1293,
                 264,
                 5593,
                 10088,
-                11,
-                50732
+                382,
+                50634
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
+            "avg_logprob": -0.12669131323531435,
+            "compression_ratio": 1.5934959349593496,
+            "no_speech_prob": 0.08621835708618164
         },
         {
-            "id": 65,
-            "seek": 24882,
-            "start": 257.99,
-            "end": 261.59,
-            "text": "as well as the feature module we created in the previous step.",
+            "id": 52,
+            "seek": 25066,
+            "start": 257.87,
+            "end": 262.63,
+            "text": "well as the feature module we created in the previous step. Now the social icons",
             "tokens": [
-                50732,
-                382,
+                50634,
                 731,
                 382,
                 264,
@@ -1821,64 +1613,34 @@
                 3894,
                 1823,
                 13,
-                50912
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 66,
-            "seek": 24882,
-            "start": 261.59,
-            "end": 263.81,
-            "text": "Now the social icons component will be available",
-            "tokens": [
-                50912,
                 823,
                 264,
                 2093,
                 23308,
+                50872
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.12669131323531435,
+            "compression_ratio": 1.5934959349593496,
+            "no_speech_prob": 0.08621835708618164
+        },
+        {
+            "id": 53,
+            "seek": 25066,
+            "start": 262.63,
+            "end": 266.51,
+            "text": "component will be available everywhere in the app. The last type we'll look at is",
+            "tokens": [
+                50872,
                 6542,
                 486,
                 312,
                 2435,
-                51023
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 67,
-            "seek": 24882,
-            "start": 263.81,
-            "end": 265.37,
-            "text": "everywhere in the app.",
-            "tokens": [
-                51023,
                 5315,
                 294,
                 264,
                 724,
                 13,
-                51101
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 68,
-            "seek": 24882,
-            "start": 265.37,
-            "end": 269.71,
-            "text": "The last type we'll look at is a core or service module.",
-            "tokens": [
-                51101,
                 440,
                 1036,
                 2010,
@@ -1887,27 +1649,27 @@
                 574,
                 412,
                 307,
+                51066
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.12669131323531435,
+            "compression_ratio": 1.5934959349593496,
+            "no_speech_prob": 0.08621835708618164
+        },
+        {
+            "id": 54,
+            "seek": 25066,
+            "start": 266.51,
+            "end": 273.15,
+            "text": "a core or service module. It has no declarations and only focuses on services",
+            "tokens": [
+                51066,
                 257,
                 4965,
                 420,
                 2643,
                 10088,
                 13,
-                51318
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 69,
-            "seek": 24882,
-            "start": 269.71,
-            "end": 273.31,
-            "text": "It has no declarations and only focuses on services",
-            "tokens": [
-                51318,
                 467,
                 575,
                 572,
@@ -1918,40 +1680,25 @@
                 16109,
                 322,
                 3328,
-                51498
+                51398
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
+            "avg_logprob": -0.12669131323531435,
+            "compression_ratio": 1.5934959349593496,
+            "no_speech_prob": 0.08621835708618164
         },
         {
-            "id": 70,
-            "seek": 24882,
-            "start": 273.31,
-            "end": 275.63,
-            "text": "for dependency injection.",
+            "id": 55,
+            "seek": 25066,
+            "start": 273.15,
+            "end": 277.55,
+            "text": "for dependency injection. Common providers to include here would be an",
             "tokens": [
-                51498,
+                51398,
                 337,
                 33621,
                 22873,
                 13,
-                51614
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
-        },
-        {
-            "id": 71,
-            "seek": 24882,
-            "start": 275.63,
-            "end": 278.51,
-            "text": "Common providers to include here would be an off service",
-            "tokens": [
-                51614,
                 18235,
                 11330,
                 281,
@@ -1960,23 +1707,24 @@
                 576,
                 312,
                 364,
-                766,
-                2643,
-                51758
+                51618
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.1480082133868793,
-            "compression_ratio": 1.6926070038910506,
-            "no_speech_prob": 0.009724310599267483
+            "avg_logprob": -0.12669131323531435,
+            "compression_ratio": 1.5934959349593496,
+            "no_speech_prob": 0.08621835708618164
         },
         {
-            "id": 72,
-            "seek": 27670,
-            "start": 278.51,
-            "end": 282.01,
-            "text": "or a toast message service, anything that provides data",
+            "id": 56,
+            "seek": 27574,
+            "start": 277.55,
+            "end": 282.75,
+            "text": "an off service or a toast message service, anything that provides data globally throughout",
             "tokens": [
                 50364,
+                364,
+                766,
+                2643,
                 420,
                 257,
                 15354,
@@ -1987,41 +1735,41 @@
                 300,
                 6417,
                 1412,
-                50539
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
-        },
-        {
-            "id": 73,
-            "seek": 27670,
-            "start": 282.01,
-            "end": 285.01,
-            "text": "globally throughout the app.",
-            "tokens": [
-                50539,
                 18958,
                 3710,
+                50624
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
+        },
+        {
+            "id": 57,
+            "seek": 27574,
+            "start": 282.75,
+            "end": 285.23,
+            "text": "the app.",
+            "tokens": [
+                50624,
                 264,
                 724,
                 13,
-                50689
+                50748
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
         },
         {
-            "id": 74,
-            "seek": 27670,
-            "start": 285.01,
-            "end": 288.05,
-            "text": "In this example, we're extracting our off service",
+            "id": 58,
+            "seek": 27574,
+            "start": 285.23,
+            "end": 290.67,
+            "text": "In this example, we're extracting our off service into the core module.",
             "tokens": [
-                50689,
+                50748,
                 682,
                 341,
                 1365,
@@ -2032,41 +1780,26 @@
                 527,
                 766,
                 2643,
-                50841
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
-        },
-        {
-            "id": 75,
-            "seek": 27670,
-            "start": 288.05,
-            "end": 290.57,
-            "text": "into the core module.",
-            "tokens": [
-                50841,
                 666,
                 264,
                 4965,
                 10088,
                 13,
-                50967
+                51020
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
         },
         {
-            "id": 76,
-            "seek": 27670,
-            "start": 290.57,
-            "end": 294.25,
-            "text": "We generate it with the CLI, then copy over the off service",
+            "id": 59,
+            "seek": 27574,
+            "start": 290.67,
+            "end": 295.35,
+            "text": "We generate it with the CLI, then copy over the off service to its new home.",
             "tokens": [
-                50967,
+                51020,
                 492,
                 8460,
                 309,
@@ -2081,41 +1814,26 @@
                 264,
                 766,
                 2643,
-                51151
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
-        },
-        {
-            "id": 77,
-            "seek": 27670,
-            "start": 294.25,
-            "end": 295.25,
-            "text": "to its new home.",
-            "tokens": [
-                51151,
                 281,
                 1080,
                 777,
                 1280,
                 13,
-                51201
+                51254
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
         },
         {
-            "id": 78,
-            "seek": 27670,
-            "start": 295.25,
-            "end": 296.89,
-            "text": "We can also remove the common module",
+            "id": 60,
+            "seek": 27574,
+            "start": 295.35,
+            "end": 299.87,
+            "text": "We can also remove the common module since we're only dealing with services here.",
             "tokens": [
-                51201,
+                51254,
                 492,
                 393,
                 611,
@@ -2123,21 +1841,6 @@
                 264,
                 2689,
                 10088,
-                51283
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
-        },
-        {
-            "id": 79,
-            "seek": 27670,
-            "start": 296.89,
-            "end": 299.69,
-            "text": "since we're only dealing with services here.",
-            "tokens": [
-                51283,
                 1670,
                 321,
                 434,
@@ -2147,21 +1850,21 @@
                 3328,
                 510,
                 13,
-                51423
+                51480
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
         },
         {
-            "id": 80,
-            "seek": 27670,
-            "start": 299.69,
-            "end": 302.27,
-            "text": "Back in the root, we can go ahead and import the core",
+            "id": 61,
+            "seek": 27574,
+            "start": 299.87,
+            "end": 304.11,
+            "text": "Back in the root, we can go ahead and import the core module and add it to the imports",
             "tokens": [
-                51423,
+                51480,
                 5833,
                 294,
                 264,
@@ -2175,21 +1878,6 @@
                 974,
                 264,
                 4965,
-                51552
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
-        },
-        {
-            "id": 81,
-            "seek": 27670,
-            "start": 302.27,
-            "end": 305.93,
-            "text": "module and add it to the imports with the others.",
-            "tokens": [
-                51552,
                 10088,
                 293,
                 909,
@@ -2197,25 +1885,40 @@
                 281,
                 264,
                 41596,
+                51692
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
+        },
+        {
+            "id": 62,
+            "seek": 27574,
+            "start": 304.11,
+            "end": 306.15,
+            "text": "with the others.",
+            "tokens": [
+                51692,
                 365,
                 264,
                 2357,
                 13,
-                51735
+                51794
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
+            "avg_logprob": -0.13827744678214746,
+            "compression_ratio": 1.7642276422764227,
+            "no_speech_prob": 0.04706648364663124
         },
         {
-            "id": 82,
-            "seek": 27670,
-            "start": 305.93,
-            "end": 307.61,
-            "text": "If we look over our app module now,",
+            "id": 63,
+            "seek": 30434,
+            "start": 306.15,
+            "end": 309.51,
+            "text": "If we look over our app module now we can see it's a lot more organized.",
             "tokens": [
-                51735,
+                50364,
                 759,
                 321,
                 574,
@@ -2224,22 +1927,6 @@
                 724,
                 10088,
                 586,
-                11,
-                51819
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.15417191935855834,
-            "compression_ratio": 1.75,
-            "no_speech_prob": 0.021194472908973694
-        },
-        {
-            "id": 83,
-            "seek": 30580,
-            "start": 307.61,
-            "end": 309.45,
-            "text": "we can see it's a lot more organized.",
-            "tokens": [
-                50364,
                 321,
                 393,
                 536,
@@ -2250,21 +1937,21 @@
                 544,
                 9983,
                 13,
-                50456
+                50532
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 84,
-            "seek": 30580,
-            "start": 309.45,
-            "end": 312.83,
-            "text": "We just have the one declaration, no providers,",
+            "id": 64,
+            "seek": 30434,
+            "start": 309.51,
+            "end": 315.11,
+            "text": "We just have the one declaration, no providers, the one bootstrap component, and just a handful",
             "tokens": [
-                50456,
+                50532,
                 492,
                 445,
                 362,
@@ -2275,21 +1962,6 @@
                 572,
                 11330,
                 11,
-                50625
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
-        },
-        {
-            "id": 85,
-            "seek": 30580,
-            "start": 312.83,
-            "end": 314.29,
-            "text": "the one bootstrap component,",
-            "tokens": [
-                50625,
                 264,
                 472,
                 11450,
@@ -2297,45 +1969,45 @@
                 4007,
                 6542,
                 11,
-                50698
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
-        },
-        {
-            "id": 86,
-            "seek": 30580,
-            "start": 314.29,
-            "end": 317.27,
-            "text": "and just a handful of modules to manage.",
-            "tokens": [
-                50698,
                 293,
                 445,
                 257,
                 16458,
+                50812
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
+        },
+        {
+            "id": 65,
+            "seek": 30434,
+            "start": 315.11,
+            "end": 317.39,
+            "text": "of modules to manage.",
+            "tokens": [
+                50812,
                 295,
                 16679,
                 281,
                 3067,
                 13,
-                50847
+                50926
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 87,
-            "seek": 30580,
-            "start": 317.27,
-            "end": 319.77,
-            "text": "That covers the main patterns you'll see with NG module",
+            "id": 66,
+            "seek": 30434,
+            "start": 317.39,
+            "end": 320.91,
+            "text": "That covers the main patterns you'll see with NG module and Angular applications.",
             "tokens": [
-                50847,
+                50926,
                 663,
                 10538,
                 264,
@@ -2348,45 +2020,29 @@
                 426,
                 38,
                 10088,
-                50972
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
-        },
-        {
-            "id": 88,
-            "seek": 30580,
-            "start": 319.77,
-            "end": 321.53,
-            "text": "and Angular applications.",
-            "tokens": [
-                50972,
                 293,
                 34107,
                 5821,
                 13,
-                51060
+                51102
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 89,
-            "seek": 30580,
-            "start": 321.53,
-            "end": 323.57,
-            "text": "In an upcoming video, I'll show you how to use the router",
+            "id": 67,
+            "seek": 30434,
+            "start": 320.91,
+            "end": 325.07,
+            "text": "In an upcoming video I'll show you how to use the router along with NG modules to",
             "tokens": [
-                51060,
+                51102,
                 682,
                 364,
                 11500,
                 960,
-                11,
                 286,
                 603,
                 855,
@@ -2396,46 +2052,46 @@
                 764,
                 264,
                 22492,
-                51162
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
-        },
-        {
-            "id": 90,
-            "seek": 30580,
-            "start": 323.57,
-            "end": 329.6,
-            "text": "along with NG modules to lazy load components.",
-            "tokens": [
-                51162,
                 2051,
                 365,
                 426,
                 38,
                 16679,
                 281,
+                51310
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
+        },
+        {
+            "id": 68,
+            "seek": 30434,
+            "start": 325.07,
+            "end": 329.78,
+            "text": "lazy load components.",
+            "tokens": [
+                51310,
                 14847,
                 3677,
                 6677,
                 13,
-                51342
+                51424
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 91,
-            "seek": 30580,
-            "start": 329.6,
-            "end": 331.0,
+            "id": 69,
+            "seek": 30434,
+            "start": 329.78,
+            "end": 331.22,
             "text": "That's it for this episode.",
             "tokens": [
-                51342,
+                51424,
                 663,
                 311,
                 309,
@@ -2443,96 +2099,81 @@
                 341,
                 3500,
                 13,
-                51412
+                51496
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 92,
-            "seek": 30580,
-            "start": 331.0,
-            "end": 333.84,
-            "text": "If you found the video helpful, please like and subscribe.",
+            "id": 70,
+            "seek": 30434,
+            "start": 331.22,
+            "end": 334.06,
+            "text": "If you found the video helpful please like and subscribe.",
             "tokens": [
-                51412,
+                51496,
                 759,
                 291,
                 1352,
                 264,
                 960,
                 4961,
-                11,
                 1767,
                 411,
                 293,
                 3022,
                 13,
-                51554
+                51638
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 93,
-            "seek": 30580,
-            "start": 333.84,
-            "end": 335.44,
-            "text": "And if you wanna support the channel,",
+            "id": 71,
+            "seek": 30434,
+            "start": 334.06,
+            "end": 338.5,
+            "text": "And if you want to support the channel consider becoming a pro subscriber at AngularFireBase.com.",
             "tokens": [
-                51554,
+                51638,
                 400,
                 498,
                 291,
-                1948,
+                528,
+                281,
                 1406,
                 264,
                 2269,
-                11,
-                51634
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
-        },
-        {
-            "id": 94,
-            "seek": 30580,
-            "start": 335.44,
-            "end": 339.72,
-            "text": "consider becoming a pro subscriber at angularfirebase.com.",
-            "tokens": [
-                51634,
                 1949,
                 5617,
                 257,
                 447,
                 26122,
                 412,
-                24413,
-                12037,
-                17429,
+                34107,
+                45651,
+                33,
+                651,
                 13,
                 1112,
                 13,
-                51848
+                51860
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.11702919999758403,
-            "compression_ratio": 1.7022653721682848,
-            "no_speech_prob": 0.013203616254031658
+            "avg_logprob": -0.1820414307269644,
+            "compression_ratio": 1.7177914110429449,
+            "no_speech_prob": 0.01473808940500021
         },
         {
-            "id": 95,
-            "seek": 33548,
-            "start": 339.72,
-            "end": 343.6,
-            "text": "For just a few bucks a month, you'll get access to exclusive content, as well as free",
+            "id": 72,
+            "seek": 33434,
+            "start": 338.58,
+            "end": 344.1,
+            "text": "For just a few bucks a month you'll get access to exclusive content as well as free one-on-one",
             "tokens": [
                 50364,
                 1171,
@@ -2542,7 +2183,6 @@
                 11829,
                 257,
                 1618,
-                11,
                 291,
                 603,
                 483,
@@ -2550,53 +2190,51 @@
                 281,
                 13005,
                 2701,
-                11,
                 382,
                 731,
                 382,
                 1737,
-                50558
-            ],
-            "temperature": 0.0,
-            "avg_logprob": -0.17392767870679815,
-            "compression_ratio": 1.2692307692307692,
-            "no_speech_prob": 0.0007122470415197313
-        },
-        {
-            "id": 96,
-            "seek": 33548,
-            "start": 343.6,
-            "end": 346.08,
-            "text": "one-on-one project consulting.",
-            "tokens": [
-                50558,
                 472,
                 12,
                 266,
                 12,
                 546,
+                50640
+            ],
+            "temperature": 0.0,
+            "avg_logprob": -0.1853789013217796,
+            "compression_ratio": 1.2755905511811023,
+            "no_speech_prob": 0.14143672585487366
+        },
+        {
+            "id": 73,
+            "seek": 33434,
+            "start": 344.1,
+            "end": 346.06,
+            "text": "project consulting.",
+            "tokens": [
+                50640,
                 1716,
                 23682,
                 13,
-                50682
+                50738
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.17392767870679815,
-            "compression_ratio": 1.2692307692307692,
-            "no_speech_prob": 0.0007122470415197313
+            "avg_logprob": -0.1853789013217796,
+            "compression_ratio": 1.2755905511811023,
+            "no_speech_prob": 0.14143672585487366
         },
         {
-            "id": 97,
-            "seek": 33548,
-            "start": 346.08,
-            "end": 348.16,
-            "text": "Thanks for watching, and I'll see you next time.",
+            "id": 74,
+            "seek": 33434,
+            "start": 346.06,
+            "end": 348.14,
+            "text": "Thanks for watching and I'll see you next time.",
             "tokens": [
-                50682,
+                50738,
                 2561,
                 337,
                 1976,
-                11,
                 293,
                 286,
                 603,
@@ -2605,14 +2243,14 @@
                 958,
                 565,
                 13,
-                50786
+                50842
             ],
             "temperature": 0.0,
-            "avg_logprob": -0.17392767870679815,
-            "compression_ratio": 1.2692307692307692,
-            "no_speech_prob": 0.0007122470415197313
+            "avg_logprob": -0.1853789013217796,
+            "compression_ratio": 1.2755905511811023,
+            "no_speech_prob": 0.14143672585487366
         }
     ],
     "language": "en",
-    "language_probability": 0.9982272982597351
+    "language_probability": 0.998158872127533
 }
