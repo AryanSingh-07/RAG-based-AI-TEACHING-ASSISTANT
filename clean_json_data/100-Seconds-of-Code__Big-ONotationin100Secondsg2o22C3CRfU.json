@@ -1,0 +1,23 @@
+{
+    "chunks": [
+        {
+            "video_name": "100-Seconds-of-Code__Big-ONotationin100Secondsg2o22C3CRfU",
+            "text": "Big O notation, a way to describe how well an algorithm performs as its input size grows. As we add more inputs or data points to an algorithm, there are two things that might grow in complexity. It may take longer to run the algorithm, which we call time complexity, or it may require more memory, which we call space complexity. The variable n represents the number of inputs. Now imagine n being scaled up to infinity. The faster the result grows after each step, the worse your algorithm performs. In technical interviews, you'll often be asked to estimate the time or space complexity of the code you've implemented. Take for example a loop over an array of elements. It takes exactly one unit of time to loop over each element. This is known as linear complexity, because we have a perfect one-to-one relationship",
+            "start": 0.14,
+            "end": 41.72
+        },
+        {
+            "video_name": "100-Seconds-of-Code__Big-ONotationin100Secondsg2o22C3CRfU",
+            "text": "between the number of inputs and the amount of time it takes to execute the algorithm. But we can often do better than linear time. If we have a sorted array, we can implement a binary search, where we start in the middle and then jump back and forth until we find the actual value we're looking for. known as logarithmic complexity, and it scales much better to a large number of inputs. At the most efficient end of the spectrum we have constant time. An example is looking up an element in an array by its index. No matter how big that array is, it should always take the same amount of time. But things can also get less efficient. Imagine a loop within a loop. This is quadratic complexity where the number of inputs is raised to the power of 2. And things can still get worse with exponential complexity. Imagine looping over",
+            "start": 41.72,
+            "end": 81.12
+        },
+        {
+            "video_name": "100-Seconds-of-Code__Big-ONotationin100Secondsg2o22C3CRfU",
+            "text": "every possible combination in an array. Some algorithms may have multiple different growth rates of complexity. Always simplify your notation down to the fastest growing, worst case scenario. This has been Big O Notation in 100 Seconds. Thanks for watching, and I will see you in the next one.",
+            "start": 81.12,
+            "end": 96.84
+        }
+    ],
+    "full_text": "Big O notation, a way to describe how well an algorithm performs as its input size grows. As we add more inputs or data points to an algorithm, there are two things that might grow in complexity. It may take longer to run the algorithm, which we call time complexity, or it may require more memory, which we call space complexity. The variable n represents the number of inputs. Now imagine n being scaled up to infinity. The faster the result grows after each step, the worse your algorithm performs. In technical interviews, you'll often be asked to estimate the time or space complexity of the code you've implemented. Take for example a loop over an array of elements. It takes exactly one unit of time to loop over each element. This is known as linear complexity, because we have a perfect one-to-one relationship between the number of inputs and the amount of time it takes to execute the algorithm. But we can often do better than linear time. If we have a sorted array, we can implement a binary search, where we start in the middle and then jump back and forth until we find the actual value we're looking for. known as logarithmic complexity, and it scales much better to a large number of inputs. At the most efficient end of the spectrum we have constant time. An example is looking up an element in an array by its index. No matter how big that array is, it should always take the same amount of time. But things can also get less efficient. Imagine a loop within a loop. This is quadratic complexity where the number of inputs is raised to the power of 2. And things can still get worse with exponential complexity. Imagine looping over every possible combination in an array. Some algorithms may have multiple different growth rates of complexity. Always simplify your notation down to the fastest growing, worst case scenario. This has been Big O Notation in 100 Seconds. Thanks for watching, and I will see you in the next one."
+}
